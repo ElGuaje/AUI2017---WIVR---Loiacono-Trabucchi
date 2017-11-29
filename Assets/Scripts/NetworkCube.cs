@@ -8,7 +8,7 @@ public class NetworkCube : Photon.MonoBehaviour
     public GameObject cube;
     private Vector3 correctCubePos;
     private Quaternion correctCubeRot = Quaternion.identity; // We lerp towards this
-    private Material correctCubeMaterial;
+    private bool correctGazedAt;
 
     void Update()
     {
@@ -16,7 +16,15 @@ public class NetworkCube : Photon.MonoBehaviour
         {
             transform.position = correctCubePos;
             cube.transform.rotation = correctCubeRot;
-            //cube.GetComponent<MeshRenderer>().material = correctCubeMaterial;
+            cube.GetComponent<Teleport>().gazedAt = correctGazedAt;
+            if (correctGazedAt)
+            {
+                cube.GetComponent<Renderer>().material = cube.GetComponent<Teleport>().gazedAtMaterial;
+            }
+            else
+            {
+                cube.GetComponent<Renderer>().material = cube.GetComponent<Teleport>().inactiveMaterial;
+            }
         }
     }
 
@@ -27,14 +35,14 @@ public class NetworkCube : Photon.MonoBehaviour
             // We own this player: send the others our data
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-            //stream.SendNext(cube.GetComponent<MeshRenderer>().material);
+            stream.SendNext(cube.GetComponent<Teleport>().gazedAt);
         }
         else if (stream.isReading)
         {
             // Network player, receive data
             this.correctCubePos = (Vector3)stream.ReceiveNext();
             this.correctCubeRot = (Quaternion)stream.ReceiveNext();
-            //this.correctCubeMaterial = (Material)stream.ReceiveNext();
+            this.correctGazedAt = (bool)stream.ReceiveNext();
         }
     }
 }

@@ -45,4 +45,6 @@ MonoBehaviour:
   - UpdateOtherPlayerController
   - SetGazedAt
   - TeleportRandomly
+  - RPCSetGazedAt
+  - SendCubes
   DisableAutoOpenWizard: 1

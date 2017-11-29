@@ -5,27 +5,39 @@ using System.Collections;
 public class Teleport : Photon.MonoBehaviour {
 
     private Vector3 startingPosition;
-
+    
     public Material inactiveMaterial;
     public Material gazedAtMaterial;
+    public bool gazedAt;
+    public bool isMine;
 
     void Start() {
           startingPosition = transform.localPosition;
+          isMine = photonView.isMine;
           SetGazedAt(false);
     }
 
-    public void SetGazedAt(bool gazedAt) {
-          if (inactiveMaterial != null && gazedAtMaterial != null) {
-               StartCoroutine("TimerToTeleport");   
-               GetComponent<Renderer>().material = gazedAt ? gazedAtMaterial : inactiveMaterial;
-               return;
-          }
-          GetComponent<Renderer>().material.color = gazedAt ? Color.green : Color.red;
+    public void SetGazedAt(bool isGazed) {
+        if (isGazed)
+        {
+            gazedAt = true;
+            GetComponent<Renderer>().material = gazedAtMaterial;
+            EventManager.TriggerEvent("GazedAtEvent");
+        }
+        else
+        {
+            gazedAt = false;
+            GetComponent<Renderer>().material = inactiveMaterial;
+            EventManager.TriggerEvent("GazedAtEvent");
+        }
+        if (!photonView.isMine)
+        {
+            photonView.RPC("RPCSetGazedAt", PhotonTargets.Others, isGazed);
+        }
     }
 
     public void Reset() {
           transform.localPosition = startingPosition;
-          StopCoroutine("TimerToTeleport");
     }
 
     public void Recenter() {
@@ -41,16 +53,28 @@ public class Teleport : Photon.MonoBehaviour {
     }
 
     [PunRPC]
+    public void RPCSetGazedAt(bool isGazed)
+    {
+        Debug.Log("Oh God!");
+        if (isGazed)
+        {
+            gazedAt = true;
+            GetComponent<Renderer>().material = gazedAtMaterial;
+            EventManager.TriggerEvent("GazedAtEvent");
+        }
+        else
+        {
+            gazedAt = false;
+            GetComponent<Renderer>().material = inactiveMaterial;
+            EventManager.TriggerEvent("GazedAtEvent");
+        }
+    }
+
+    [PunRPC]
     public void TeleportRandomly() {
           Vector3 direction = Random.onUnitSphere;
           direction.y = Mathf.Clamp(direction.y, 0.5f, 1f);
           float distance = 2 * Random.value + 1.5f;
           transform.localPosition = direction * distance;
-    }
-
-    IEnumerator TimerToTeleport()
-    {
-        yield return new WaitForSeconds(5);
-        photonView.RPC("TeleportRandomly", PhotonTargets.MasterClient);
     }
 }
