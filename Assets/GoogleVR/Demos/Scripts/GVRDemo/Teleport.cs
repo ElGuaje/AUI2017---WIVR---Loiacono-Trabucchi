@@ -10,6 +10,8 @@ public class Teleport : Photon.MonoBehaviour {
     public Material gazedAtMaterial;
     public bool gazedAt;
     public bool isMine;
+    public int playerCube;
+    public int cubeNumber;
 
     void Start() {
           startingPosition = transform.localPosition;

@@ -30,7 +30,7 @@ public class ServerMatchmaking : Photon.PunBehaviour
         }
         else
         {
-            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(2f, 1.6f, 0), Quaternion.identity, 0);
+            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(10f, 1.6f, 0), Quaternion.identity, 0);
             StartGame();
         }
         currentPlayer.GetComponent<PlayerController>().isControllable = true;
@@ -47,4 +47,5 @@ public class ServerMatchmaking : Photon.PunBehaviour
         Debug.Log("Can't join random room!");
         PhotonNetwork.CreateRoom(null);
     }
+
 }
