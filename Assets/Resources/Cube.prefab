@@ -104,6 +104,8 @@ MonoBehaviour:
   gazedAtMaterial: {fileID: 2100000, guid: daad62324deb0cf448e5c805c8459bff, type: 2}
   gazedAt: 0
   isMine: 0
+  playerCube: 0
+  cubeNumber: 0
 --- !u!114 &114132331638224700
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -16,7 +16,7 @@ public class Teleport : Photon.MonoBehaviour {
     void Start() {
           startingPosition = transform.localPosition;
           isMine = photonView.isMine;
-          SetGazedAt(false);
+          gazedAt = false;
     }
 
     public void SetGazedAt(bool isGazed) {
@@ -36,6 +36,7 @@ public class Teleport : Photon.MonoBehaviour {
         {
             photonView.RPC("RPCSetGazedAt", PhotonTargets.Others, isGazed);
         }
+        Debug.Log(playerCube + " " + cubeNumber);
     }
 
     public void Reset() {
@@ -57,7 +58,6 @@ public class Teleport : Photon.MonoBehaviour {
     [PunRPC]
     public void RPCSetGazedAt(bool isGazed)
     {
-        Debug.Log("Oh God!");
         if (isGazed)
         {
             gazedAt = true;
@@ -70,6 +70,7 @@ public class Teleport : Photon.MonoBehaviour {
             GetComponent<Renderer>().material = inactiveMaterial;
             EventManager.TriggerEvent("GazedAtEvent");
         }
+
     }
 
     [PunRPC]
