@@ -5,7 +5,8 @@ using System.Collections;
 public class Teleport : Photon.MonoBehaviour {
 
     private Vector3 startingPosition;
-    
+
+    public Vector3 myPlayerPosition;
     public Material inactiveMaterial;
     public Material gazedAtMaterial;
     public bool gazedAt;
@@ -36,7 +37,6 @@ public class Teleport : Photon.MonoBehaviour {
         {
             photonView.RPC("RPCSetGazedAt", PhotonTargets.Others, isGazed);
         }
-        Debug.Log(playerCube + " " + cubeNumber);
     }
 
     public void Reset() {
@@ -75,9 +75,38 @@ public class Teleport : Photon.MonoBehaviour {
 
     [PunRPC]
     public void TeleportRandomly() {
-          Vector3 direction = Random.onUnitSphere;
-          direction.y = Mathf.Clamp(direction.y, 0.5f, 1f);
-          float distance = 2 * Random.value + 1.5f;
-          transform.localPosition = direction * distance;
+
+        float sign = Mathf.Sign(myPlayerPosition.x - transform.position.x);
+          
+        Vector3 direction = Random.onUnitSphere;
+        direction.x = Mathf.Clamp(direction.x, 0.5f, 1f);
+        direction.y = Mathf.Clamp(direction.y, 0.5f, 1f);
+        float distance = 2.5f;
+        transform.position = new Vector3(myPlayerPosition.x + direction.x * distance * sign, myPlayerPosition.y + direction.y * distance,
+                     myPlayerPosition.z + direction.z * distance);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        photonView.RPC("TeleportRandomly", PhotonTargets.All);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(playerCube);
+        }
+        else if (stream.isReading)
+        {
+            // Network player, receive data
+            this.playerCube = (int)stream.ReceiveNext();
+        }
+    }
+
+    public void RequestOwnership(int viewID)
+    {
+        photonView.TransferOwnership(viewID);
     }
 }
