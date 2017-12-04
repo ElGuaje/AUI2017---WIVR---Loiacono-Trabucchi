@@ -11,19 +11,27 @@ public class GameManager : Photon.MonoBehaviour {
 
     private int playerViewID;
     private UnityAction startTeleport;
+    private GameObject spriteLoader;
 
     private void Awake()
     {
         startTeleport = new UnityAction(StartTeleport);
 
+
     }
 
     // Use this for initialization
     void Start () {
-
-
         players = new GameObject[10];
         players = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("Fin qui okay");
+        spriteLoader = GameObject.FindGameObjectWithTag("SpriteLoader");
+
+        Debug.Log("Anche Fin qui okay");
+
+        Sprite[] allSprites = spriteLoader.GetComponent<SpriteLoader>().allSprites;
+
+        Debug.Log("Uccazz");
 
         foreach (GameObject p in players)
         {
@@ -37,6 +45,7 @@ public class GameManager : Photon.MonoBehaviour {
             for (int i = 0; i < cubeNumbers; i++)
             {
                 int j = 0;
+                int index = Random.Range(0, allSprites.Length);
 
                 foreach (GameObject p in players)
                 {
@@ -57,18 +66,19 @@ public class GameManager : Photon.MonoBehaviour {
                     direction.x = Mathf.Clamp(direction.x, 0.5f, 1f);
                     direction.y = Random.Range(0.5f, 1f);
                     Debug.Log(direction.y);
-                    GameObject cube1 = PhotonNetwork.Instantiate("Cube", new Vector3 (p.transform.position.x + direction.x*distance*sign, p.transform.position.y + direction.y* distance,
-                        p.transform.position.z + direction.z* distance), Quaternion.identity, 0);
+                    GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3 (p.transform.position.x + direction.x*distance*sign, 
+                        p.transform.position.y + direction.y* distance, p.transform.position.z + direction.z* distance), Quaternion.identity, 0);
 
-                    cube1.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
-                    cube1.GetComponent<Teleport>().playerCube = playerID;
-                    cube1.GetComponent<Teleport>().cubeNumber = i;
-                    cube1.GetComponent<Teleport>().inactiveMaterial.color = new Vector4(0, 0, 0, 0.3f);
+                    memoryElement.GetComponent<SpriteRenderer>().sprite = allSprites[index];
+                    memoryElement.GetComponent<Teleport>().spriteIndex = index;
+                    memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
+                    memoryElement.GetComponent<Teleport>().playerCube = playerID;
+                    memoryElement.GetComponent<Teleport>().cubeNumber = i;
 
                     j++;
                 }
             }
-            cubes = GameObject.FindGameObjectsWithTag("Cube");
+            cubes = GameObject.FindGameObjectsWithTag("MemoryElement");
         }
         if (!photonView.isMine)
             StartCoroutine("SearchCubes");
@@ -107,7 +117,7 @@ public class GameManager : Photon.MonoBehaviour {
 
         while (cubes[(cubeNumbers*2-1)] == null)
         {
-            cubes = GameObject.FindGameObjectsWithTag("Cube");
+            cubes = GameObject.FindGameObjectsWithTag("MemoryElement");
             yield return null;
         }
 
@@ -122,11 +132,12 @@ public class GameManager : Photon.MonoBehaviour {
 
     IEnumerator TimerToTeleport(GameObject cube1, GameObject cube2)
     {
+        Debug.Log("Deactivation Started");
         yield return new WaitForSeconds(3);
         if (!photonView.isMine)
         {
-            cube1.GetComponent<Teleport>().photonView.RPC("TeleportRandomly", PhotonTargets.Others);
-            cube2.GetComponent<Teleport>().photonView.RPC("TeleportRandomly", PhotonTargets.Others);
+            cube1.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
+            cube2.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
         }
         else
         {

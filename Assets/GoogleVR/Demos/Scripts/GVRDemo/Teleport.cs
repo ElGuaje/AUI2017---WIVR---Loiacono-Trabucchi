@@ -10,33 +10,32 @@ public class Teleport : Photon.MonoBehaviour {
     public Material inactiveMaterial;
     public Material gazedAtMaterial;
     public bool gazedAt;
-    public bool isMine;
     public int playerCube;
     public int cubeNumber;
+    public int spriteIndex;
 
     void Start() {
-          startingPosition = transform.localPosition;
-          isMine = photonView.isMine;
-          gazedAt = false;
+        startingPosition = transform.localPosition;
+        gazedAt = false;
     }
 
     public void SetGazedAt(bool isGazed) {
-        if (isGazed)
+        if (isGazed && photonView.isMine)
         {
             gazedAt = true;
-            GetComponent<Renderer>().material = gazedAtMaterial;
+            GetComponent<SpriteRenderer>().material = gazedAtMaterial;
             EventManager.TriggerEvent("GazedAtEvent");
         }
         else
         {
             gazedAt = false;
-            GetComponent<Renderer>().material = inactiveMaterial;
+            GetComponent<SpriteRenderer>().material = inactiveMaterial;
             EventManager.TriggerEvent("GazedAtEvent");
         }
-        if (!photonView.isMine)
+        /*if (!photonView.isMine)
         {
             photonView.RPC("RPCSetGazedAt", PhotonTargets.Others, isGazed);
-        }
+        }*/
     }
 
     public void Reset() {
@@ -55,7 +54,7 @@ public class Teleport : Photon.MonoBehaviour {
       #endif  // !UNITY_EDITOR
     }
 
-    [PunRPC]
+ /*   [PunRPC]
     public void RPCSetGazedAt(bool isGazed)
     {
         if (isGazed)
@@ -71,11 +70,10 @@ public class Teleport : Photon.MonoBehaviour {
             EventManager.TriggerEvent("GazedAtEvent");
         }
 
-    }
+    }*/
 
     [PunRPC]
     public void TeleportRandomly() {
-
         float sign = Mathf.Sign(myPlayerPosition.x - transform.position.x);
           
         Vector3 direction = Random.onUnitSphere;
@@ -84,6 +82,12 @@ public class Teleport : Photon.MonoBehaviour {
         float distance = 2.5f;
         transform.position = new Vector3(myPlayerPosition.x + direction.x * distance * sign, myPlayerPosition.y + direction.y * distance,
                      myPlayerPosition.z + direction.z * distance);
+    }
+
+    [PunRPC]
+    public void Deactivate()
+    {
+        this.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -97,11 +101,14 @@ public class Teleport : Photon.MonoBehaviour {
         {
             // We own this player: send the others our data
             stream.SendNext(playerCube);
+            stream.SendNext(spriteIndex);
         }
         else if (stream.isReading)
         {
             // Network player, receive data
             this.playerCube = (int)stream.ReceiveNext();
+            this.spriteIndex = (int)stream.ReceiveNext();
+            this.GetComponent<SpriteRenderer>().sprite = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>().allSprites[spriteIndex];
         }
     }
 

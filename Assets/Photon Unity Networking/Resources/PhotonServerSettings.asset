@@ -47,4 +47,5 @@ MonoBehaviour:
   - TeleportRandomly
   - RPCSetGazedAt
   - SendCubes
+  - Deactivate
   DisableAutoOpenWizard: 1
