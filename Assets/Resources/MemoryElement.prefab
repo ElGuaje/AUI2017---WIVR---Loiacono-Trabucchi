@@ -73,8 +73,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7253145, y: 0.69450045, z: 1}
-  m_Center: {x: -0.0039179325, y: -0.0005876422, z: 0}
+  m_Size: {x: 0.6053635, y: 0.5710945, z: 0.06505433}
+  m_Center: {x: -0.0013060719, y: -0.0059230924, z: -0.0022647455}
 --- !u!114 &114405816458911900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,6 +92,7 @@ MonoBehaviour:
   gazedAt: 0
   playerCube: 0
   cubeNumber: 0
+  spriteIndex: 0
 --- !u!114 &114461066985329702
 MonoBehaviour:
   m_ObjectHideFlags: 1

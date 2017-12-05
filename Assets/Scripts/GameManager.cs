@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -33,16 +34,33 @@ public class GameManager : Photon.MonoBehaviour {
 
         if (photonView.isMine)
         {
+            int[] indexes = new int[elementsNumber];
             memoryElements = new GameObject[elementsNumber * 2];
             for (int i = 0; i < elementsNumber; i++)
             {
                 int j = 0;
-                int index = Random.Range(0, spriteLoader.allSprites.Length);
+                int index = 0;
+                bool isRepeated = true;
+                while (isRepeated)
+                {
+                    isRepeated = false;
+                    index = UnityEngine.Random.Range(0, spriteLoader.allSprites.Length);
+                    foreach(int l in indexes)
+                    {
+                        if (l == index)
+                        {
+                            isRepeated = true;
+                            break;
+                        }
+                    }
+                }
 
+                indexes[i] = index;
+                        
                 foreach (GameObject p in players)
                 {
                     int sign;
-                    Vector3 direction = Random.onUnitSphere;
+                    Vector3 direction = UnityEngine.Random.onUnitSphere;
                     int playerID= p.gameObject.GetPhotonView().viewID;
                     float distance = 2.5f;
 
@@ -56,7 +74,7 @@ public class GameManager : Photon.MonoBehaviour {
                     }
                     
                     direction.x = Mathf.Clamp(direction.x, 0.5f, 1f);
-                    direction.y = Random.Range(0.5f, 1f);
+                    direction.y = UnityEngine.Random.Range(0.5f, 1f);
                     Debug.Log(direction.y);
                     GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3 (p.transform.position.x + direction.x*distance*sign, 
                         p.transform.position.y + direction.y* distance, p.transform.position.z + direction.z* distance), Quaternion.identity, 0);
@@ -66,7 +84,7 @@ public class GameManager : Photon.MonoBehaviour {
                     memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
                     memoryElement.GetComponent<Teleport>().playerCube = playerID;
                     memoryElement.GetComponent<Teleport>().cubeNumber = i;
-
+                                        
                     j++;
                 }
             }
@@ -124,9 +142,21 @@ public class GameManager : Photon.MonoBehaviour {
 
     IEnumerator DeactivateTimer(GameObject memoeryElement1, GameObject memoeryElement2)
     {
+        elementsFound += 1;
         Debug.Log("Deactivation Started");
         yield return new WaitForSeconds(3);
         memoeryElement1.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
         memoeryElement2.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
+
+        if (elementsFound == elementsNumber)
+        {
+            photonView.RPC("SendGameOver", PhotonTargets.All);
+        }
+    }
+
+    [PunRPC]
+    private void SendGameOver()
+    {
+        EventManager.TriggerEvent("GameOver");
     }
 }

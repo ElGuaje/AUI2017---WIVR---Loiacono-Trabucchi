@@ -48,4 +48,5 @@ MonoBehaviour:
   - RPCSetGazedAt
   - SendCubes
   - Deactivate
+  - SendGameOver
   DisableAutoOpenWizard: 1

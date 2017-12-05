@@ -52,28 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442db04355333e946992ac21528b3cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  cubeNumbers: 3
+  memoryElements: []
+  elementsNumber: 10
   players: []
 --- !u!114 &114598177267935254
 MonoBehaviour:
