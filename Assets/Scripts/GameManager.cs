@@ -106,13 +106,16 @@ public class GameManager : Photon.MonoBehaviour {
 
                 GameObject memoryElement2 = memoryElements[j];
 		        if (memoryElement1.GetComponent<Teleport>().gazedAt && memoryElement2.GetComponent<Teleport>().gazedAt &&
-                    memoryElement1.GetComponent<Teleport>().cubeNumber == memoryElement2.GetComponent<Teleport>().cubeNumber)
+                    memoryElement1.GetComponent<Teleport>().spriteIndex == memoryElement2.GetComponent<Teleport>().spriteIndex
+                    && memoryElement1.activeInHierarchy && memoryElement1.activeInHierarchy)
                 {
+                    Debug.Log("Urca");
+                    Debug.Log(memoryElement1.GetComponent<Teleport>().cubeNumber + " " + memoryElement2.GetComponent<Teleport>().cubeNumber);
                     StartCoroutine(DeactivateTimer(memoryElement1, memoryElement2));
                 }
                 else
                 {
-                    StopCoroutine(DeactivateTimer(memoryElement1, memoryElement2));
+                    StopCoroutine("DeactivateTimer");
                 }
             }
         }

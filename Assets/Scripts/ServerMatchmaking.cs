@@ -24,7 +24,7 @@ public class ServerMatchmaking : Photon.PunBehaviour
 
     public override void OnJoinedRoom()
     {
-        if (PhotonNetwork.countOfPlayers == 1)
+        if (PhotonNetwork.playerList.Length == 1)
         {
             currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(0, 1.6f, 0), Quaternion.identity, 0);
         }
@@ -38,6 +38,7 @@ public class ServerMatchmaking : Photon.PunBehaviour
 
     private void StartGame()
     {
+        PhotonNetwork.room.IsVisible = false;
         PhotonNetwork.Instantiate("GameManager", new Vector3(0, 0, 0), Quaternion.identity, 0);
     }
 

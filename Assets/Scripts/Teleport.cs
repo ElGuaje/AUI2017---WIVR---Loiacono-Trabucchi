@@ -32,10 +32,6 @@ public class Teleport : Photon.MonoBehaviour {
             GetComponent<SpriteRenderer>().material = inactiveMaterial;
             EventManager.TriggerEvent("GazedAtEvent");
         }
-        /*if (!photonView.isMine)
-        {
-            photonView.RPC("RPCSetGazedAt", PhotonTargets.Others, isGazed);
-        }*/
     }
 
     public void Reset() {
@@ -54,24 +50,6 @@ public class Teleport : Photon.MonoBehaviour {
       #endif  // !UNITY_EDITOR
     }
 
- /*   [PunRPC]
-    public void RPCSetGazedAt(bool isGazed)
-    {
-        if (isGazed)
-        {
-            gazedAt = true;
-            GetComponent<Renderer>().material = gazedAtMaterial;
-            EventManager.TriggerEvent("GazedAtEvent");
-        }
-        else
-        {
-            gazedAt = false;
-            GetComponent<Renderer>().material = inactiveMaterial;
-            EventManager.TriggerEvent("GazedAtEvent");
-        }
-
-    }*/
-
     [PunRPC]
     public void TeleportRandomly() {
         float sign = Mathf.Sign(myPlayerPosition.x - transform.position.x);
@@ -87,12 +65,16 @@ public class Teleport : Photon.MonoBehaviour {
     [PunRPC]
     public void Deactivate()
     {
+        PhotonNetwork.Instantiate("Bubbles", transform.position, Quaternion.identity, 0);
         this.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        photonView.RPC("TeleportRandomly", PhotonTargets.All);
+        if (other.tag.Equals("MemoryElement"))
+        {
+            photonView.RPC("TeleportRandomly", PhotonTargets.All);
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
