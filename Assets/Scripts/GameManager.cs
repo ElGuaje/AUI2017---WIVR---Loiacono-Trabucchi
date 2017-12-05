@@ -5,33 +5,25 @@ using UnityEngine.Events;
 
 public class GameManager : Photon.MonoBehaviour {
 
-    public GameObject[] cubes;
-    public int cubeNumbers = 3;
+    public GameObject[] memoryElements;
+    public int elementsNumber = 3;
     public GameObject[] players;
 
     private int playerViewID;
-    private UnityAction startTeleport;
-    private GameObject spriteLoader;
+    private UnityAction startDeactivation;
+    private SpriteLoader spriteLoader;
+    private int elementsFound = 0;
 
     private void Awake()
     {
-        startTeleport = new UnityAction(StartTeleport);
-
-
+        startDeactivation = new UnityAction(StartDeactivation);
     }
 
     // Use this for initialization
     void Start () {
         players = new GameObject[10];
         players = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("Fin qui okay");
-        spriteLoader = GameObject.FindGameObjectWithTag("SpriteLoader");
-
-        Debug.Log("Anche Fin qui okay");
-
-        Sprite[] allSprites = spriteLoader.GetComponent<SpriteLoader>().allSprites;
-
-        Debug.Log("Uccazz");
+        spriteLoader = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>();
 
         foreach (GameObject p in players)
         {
@@ -41,11 +33,11 @@ public class GameManager : Photon.MonoBehaviour {
 
         if (photonView.isMine)
         {
-            cubes = new GameObject[cubeNumbers * 2];
-            for (int i = 0; i < cubeNumbers; i++)
+            memoryElements = new GameObject[elementsNumber * 2];
+            for (int i = 0; i < elementsNumber; i++)
             {
                 int j = 0;
-                int index = Random.Range(0, allSprites.Length);
+                int index = Random.Range(0, spriteLoader.allSprites.Length);
 
                 foreach (GameObject p in players)
                 {
@@ -69,7 +61,7 @@ public class GameManager : Photon.MonoBehaviour {
                     GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3 (p.transform.position.x + direction.x*distance*sign, 
                         p.transform.position.y + direction.y* distance, p.transform.position.z + direction.z* distance), Quaternion.identity, 0);
 
-                    memoryElement.GetComponent<SpriteRenderer>().sprite = allSprites[index];
+                    memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index];
                     memoryElement.GetComponent<Teleport>().spriteIndex = index;
                     memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
                     memoryElement.GetComponent<Teleport>().playerCube = playerID;
@@ -78,31 +70,31 @@ public class GameManager : Photon.MonoBehaviour {
                     j++;
                 }
             }
-            cubes = GameObject.FindGameObjectsWithTag("MemoryElement");
+            memoryElements = GameObject.FindGameObjectsWithTag("MemoryElement");
         }
         if (!photonView.isMine)
-            StartCoroutine("SearchCubes");
-        EventManager.StartListening("GazedAtEvent", startTeleport);
+            StartCoroutine("searchImages");
+        EventManager.StartListening("GazedAtEvent", startDeactivation);
     }
 
-    private void StartTeleport()
+    private void StartDeactivation()
     {
-        for (int i = 0; i < cubeNumbers*2; i++)
+        for (int i = 0; i < elementsNumber*2; i++)
         {
-            GameObject cube1 = cubes[i];
-            for (int j = 0; j < cubeNumbers*2; j++)
+            GameObject memoryElement1 = memoryElements[i];
+            for (int j = 0; j < elementsNumber*2; j++)
             {
                 if (i > j || i == j) continue;
 
-                GameObject cube2 = cubes[j];
-		        if (cube1.GetComponent<Teleport>().gazedAt && cube2.GetComponent<Teleport>().gazedAt &&
-                    cube1.GetComponent<Teleport>().cubeNumber == cube2.GetComponent<Teleport>().cubeNumber)
+                GameObject memoryElement2 = memoryElements[j];
+		        if (memoryElement1.GetComponent<Teleport>().gazedAt && memoryElement2.GetComponent<Teleport>().gazedAt &&
+                    memoryElement1.GetComponent<Teleport>().cubeNumber == memoryElement2.GetComponent<Teleport>().cubeNumber)
                 {
-                    StartCoroutine(TimerToTeleport(cube1, cube2));
+                    StartCoroutine(DeactivateTimer(memoryElement1, memoryElement2));
                 }
                 else
                 {
-                    StopCoroutine(TimerToTeleport(cube1, cube2));
+                    StopCoroutine(DeactivateTimer(memoryElement1, memoryElement2));
                 }
             }
         }
@@ -110,39 +102,31 @@ public class GameManager : Photon.MonoBehaviour {
 
     }
 
-    IEnumerator SearchCubes()
+    IEnumerator searchImages()
     {
         yield return new WaitForSeconds(1);
-        cubes = new GameObject[cubeNumbers * 2];
+        memoryElements = new GameObject[elementsNumber * 2];
 
-        while (cubes[(cubeNumbers*2-1)] == null)
+        while (memoryElements[(elementsNumber*2-1)] == null)
         {
-            cubes = GameObject.FindGameObjectsWithTag("MemoryElement");
+            memoryElements = GameObject.FindGameObjectsWithTag("MemoryElement");
             yield return null;
         }
 
-        foreach (GameObject cube in cubes)
+        foreach (GameObject memoryElement in memoryElements)
         {
-            Debug.Log(playerViewID + " " + cube.GetComponent<Teleport>().playerCube);
-            if (playerViewID != cube.GetComponent<Teleport>().playerCube)
-                cube.GetComponent<Teleport>().RequestOwnership(cube.GetComponent<Teleport>().playerCube);
+            Debug.Log(playerViewID + " " + memoryElement.GetComponent<Teleport>().playerCube);
+            if (playerViewID != memoryElement.GetComponent<Teleport>().playerCube)
+                memoryElement.GetComponent<Teleport>().RequestOwnership(memoryElement.GetComponent<Teleport>().playerCube);
         }
 
     }
 
-    IEnumerator TimerToTeleport(GameObject cube1, GameObject cube2)
+    IEnumerator DeactivateTimer(GameObject memoeryElement1, GameObject memoeryElement2)
     {
         Debug.Log("Deactivation Started");
         yield return new WaitForSeconds(3);
-        if (!photonView.isMine)
-        {
-            cube1.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
-            cube2.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
-        }
-        else
-        {
-            cube1.GetComponent<Teleport>().TeleportRandomly();
-            cube2.GetComponent<Teleport>().TeleportRandomly();
-        }
+        memoeryElement1.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
+        memoeryElement2.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
     }
 }
