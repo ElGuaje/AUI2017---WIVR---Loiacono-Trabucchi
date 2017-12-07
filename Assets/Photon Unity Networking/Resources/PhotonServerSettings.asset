@@ -49,4 +49,5 @@ MonoBehaviour:
   - SendCubes
   - Deactivate
   - SendGameOver
+  - ShowGameover
   DisableAutoOpenWizard: 1

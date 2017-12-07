@@ -12,13 +12,17 @@ public class GameManager : Photon.MonoBehaviour {
 
     private int playerViewID;
     private UnityAction startDeactivation;
+    private UnityAction countElement;
     private SpriteLoader spriteLoader;
     private int elementsFound = 0;
 
     private void Awake()
     {
         startDeactivation = new UnityAction(StartDeactivation);
+        countElement = new UnityAction(CountElement);
     }
+
+
 
     // Use this for initialization
     void Start () {
@@ -93,6 +97,23 @@ public class GameManager : Photon.MonoBehaviour {
         if (!photonView.isMine)
             StartCoroutine("searchImages");
         EventManager.StartListening("GazedAtEvent", startDeactivation);
+        EventManager.StartListening("ElementFound", countElement);
+
+    }
+
+    private void CountElement()
+    {
+        if (this.photonView.isMine)
+        {
+            elementsFound += 1;
+            if (elementsFound == elementsNumber * 2)
+            {
+                foreach (GameObject p in players)
+                {
+                    p.GetComponent<NetworkPlayer>().photonView.RPC("ShowGameover", PhotonTargets.All);
+                }
+            }
+        }
     }
 
     private void StartDeactivation()
@@ -145,21 +166,11 @@ public class GameManager : Photon.MonoBehaviour {
 
     IEnumerator DeactivateTimer(GameObject memoeryElement1, GameObject memoeryElement2)
     {
-        elementsFound += 1;
         Debug.Log("Deactivation Started");
         yield return new WaitForSeconds(3);
         memoeryElement1.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
         memoeryElement2.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
 
-        if (elementsFound == elementsNumber)
-        {
-            photonView.RPC("SendGameOver", PhotonTargets.All);
-        }
     }
 
-    [PunRPC]
-    private void SendGameOver()
-    {
-        EventManager.TriggerEvent("GameOver");
-    }
 }

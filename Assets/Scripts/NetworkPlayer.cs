@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetworkPlayer : Photon.MonoBehaviour
 {
 
     public GameObject otherPlayerHead;
     public Camera playerCamera;
+    public GameObject canvas;
 
     private Vector3 correctPlayerPos;
     private Quaternion correctPlayerRot = Quaternion.identity; // We lerp towards this
@@ -43,5 +45,14 @@ public class NetworkPlayer : Photon.MonoBehaviour
             this.correctPlayerRot = (Quaternion)stream.ReceiveNext();
         }
     }
+
+    [PunRPC]
+    public void ShowGameover()
+    {
+        SoundManager.Instance.Fanfare();
+        Text t = canvas.GetComponentInChildren<Text>();
+        t.text = "Hai Vinto!";
+    }
+
 
 }
