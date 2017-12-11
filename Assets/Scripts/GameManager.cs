@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class GameManager : Photon.MonoBehaviour {
 
     public GameObject[] memoryElements;
-    public int elementsNumber = 3;
+    public int elementsNumber = 0;
     public GameObject[] players;
 
     private int playerViewID;
@@ -18,6 +18,7 @@ public class GameManager : Photon.MonoBehaviour {
 
     private void Awake()
     {
+        elementsNumber = RemoteSettings.GetInt("memoryElements");
         startDeactivation = new UnityAction(StartDeactivation);
         countElement = new UnityAction(CountElement);
     }

@@ -6,10 +6,24 @@ public class SpriteLoader : MonoBehaviour {
 
     public Sprite[] allSprites;
 
-    void Start()
+    private string path;
+
+    private void Awake()
     {
-        allSprites = Resources.LoadAll<Sprite>("Emojis");
-        Debug.Log("Hi boyz. We have: " + allSprites.Length);
+        allSprites = new Sprite[RemoteSettings.GetInt("numberOfImages")];
+        path = RemoteSettings.GetString("path");
+    }
+
+    IEnumerator Start()
+    {
+        Texture2D tex;
+        tex = new Texture2D(4, 4, TextureFormat.RGBA32, false);
+        WWW www = new WWW(path);
+        Debug.Log(www.error);
+        yield return www;
+        www.LoadImageIntoTexture(tex);
+        Sprite mySprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f); 
+        allSprites[0] = mySprite;
     }
 
 }
