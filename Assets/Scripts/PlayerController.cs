@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject head;
     public GameObject playerCamera;
+    public GameObject playerCanvas;
 
     private Camera cam;
 
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            playerCanvas.SetActive(false);
             playerCamera.SetActive(false);
         }
     }

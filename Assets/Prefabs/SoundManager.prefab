@@ -109,7 +109,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -189,7 +189,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -216,4 +216,4 @@ MonoBehaviour:
   as_game: {fileID: 82789666023863678}
   ac_fanfare: {fileID: 8300000, guid: 0d7e9fc911184b1409abc1f8d01cdf29, type: 3}
   as_objects: {fileID: 82065353150572436}
-  ac_objectfound: {fileID: 8300000, guid: d6a5401c53f86174799228f65f4f9b4d, type: 3}
+  ac_objectfound: {fileID: 8300000, guid: 3b4616262a41f1047abb09f2b990c0a8, type: 3}

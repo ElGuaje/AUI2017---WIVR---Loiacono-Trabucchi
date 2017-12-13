@@ -49,7 +49,9 @@ public class NetworkPlayer : Photon.MonoBehaviour
     [PunRPC]
     public void ShowGameover()
     {
+        Debug.Log("I'm here!");
         SoundManager.Instance.Fanfare();
+        canvas.GetComponentInChildren<Image>().enabled = true;
         Text t = canvas.GetComponentInChildren<Text>();
         t.text = "Hai Vinto!";
     }

@@ -106,7 +106,7 @@ public class GameManager : Photon.MonoBehaviour {
         if (this.photonView.isMine)
         {
             elementsFound += 1;
-            if (elementsFound == elementsNumber * 2)
+            if (elementsFound == (elementsNumber * 2))
             {
                 foreach (GameObject p in players)
                 {
@@ -121,6 +121,9 @@ public class GameManager : Photon.MonoBehaviour {
         for (int i = 0; i < elementsNumber*2; i++)
         {
             GameObject memoryElement1 = memoryElements[i];
+
+            if (!memoryElement1.activeInHierarchy) continue;
+
             for (int j = 0; j < elementsNumber*2; j++)
             {
                 if (i > j || i == j) continue;
