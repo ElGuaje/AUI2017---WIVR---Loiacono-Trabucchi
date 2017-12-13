@@ -26,6 +26,7 @@ public class GameManager : Photon.MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        elementsNumber = RemoteSettings.GetInt("memoryElements");
         players = new GameObject[10];
         players = GameObject.FindGameObjectsWithTag("Player");
         spriteLoader = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>();
