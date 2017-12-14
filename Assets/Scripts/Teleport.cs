@@ -65,10 +65,13 @@ public class Teleport : Photon.MonoBehaviour {
     [PunRPC]
     public void Deactivate()
     {
-        PhotonNetwork.Instantiate("Bubbles", transform.position, Quaternion.identity, 0);
-        SoundManager.Instance.ObjectFound();
-        EventManager.TriggerEvent("ElementFound");
-        this.gameObject.SetActive(false);
+        if (gameObject.activeInHierarchy)
+        {
+            PhotonNetwork.Instantiate("Bubbles", transform.position, Quaternion.identity, 0);
+            SoundManager.Instance.ObjectFound();
+            EventManager.TriggerEvent("ElementFound");
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
