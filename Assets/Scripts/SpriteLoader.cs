@@ -8,7 +8,7 @@ public class SpriteLoader : MonoBehaviour {
 
     void Start()
     {
-        allSprites = Resources.LoadAll<Sprite>("Emojis");
+        allSprites = Resources.LoadAll<Sprite>(RemoteSettings.GetString("path"));
         Debug.Log("Hi boyz. We have: " + allSprites.Length);
     }
 

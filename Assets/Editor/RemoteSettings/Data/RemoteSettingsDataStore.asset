@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Name: RemoteSettingsDataStore
   m_EditorClassIdentifier: 
   rsKeyList:
-  - key: memoryElements
-    value: 4
-    type: int
-  - key: path
-    value: file:///D:/Personal Projects/AUI2017-WIVR/AUI2017---WIVR---Loiacono-Trabucchi/Assets/Resources/Emojis.png
-    type: string
   - key: numberOfImages
     value: 10
     type: int
+  - key: memoryElements
+    value: 6
+    type: int
+  - key: path
+    value: Emojis
+    type: string
