@@ -23,8 +23,12 @@ public class NetworkCube : Photon.MonoBehaviour
             }
             else
             {
-                cube.GetComponent<Renderer>().material = cube.GetComponent<Teleport>().inactiveMaterial;
+                cube.GetComponent<Renderer>().material = cube.GetComponent<Teleport>().inactiveMaterialNotMine;
             }
+        }
+        if (photonView.isMine && cube.GetComponent<Renderer>().sharedMaterial == cube.GetComponent<Teleport>().inactiveMaterialNotMine)
+        {
+            cube.GetComponent<Renderer>().material = cube.GetComponent<Teleport>().inactiveMaterialMine;
         }
     }
 

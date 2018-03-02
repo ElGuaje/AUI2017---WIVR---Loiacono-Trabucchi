@@ -7,7 +7,8 @@ public class Teleport : Photon.MonoBehaviour {
     private Vector3 startingPosition;
 
     public Vector3 myPlayerPosition;
-    public Material inactiveMaterial;
+    public Material inactiveMaterialNotMine;
+    public Material inactiveMaterialMine;
     public Material gazedAtMaterial;
     public bool gazedAt;
     public int playerCube;
@@ -29,8 +30,16 @@ public class Teleport : Photon.MonoBehaviour {
         else
         {
             gazedAt = false;
-            GetComponent<SpriteRenderer>().material = inactiveMaterial;
-            EventManager.TriggerEvent("GazedAtEvent");
+            if (photonView.isMine)
+            {
+                GetComponent<SpriteRenderer>().material = inactiveMaterialMine;
+                EventManager.TriggerEvent("GazedAtEvent");
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().material = inactiveMaterialNotMine;
+                EventManager.TriggerEvent("GazedAtEvent");
+            }
         }
     }
 
@@ -52,13 +61,16 @@ public class Teleport : Photon.MonoBehaviour {
 
     [PunRPC]
     public void TeleportRandomly() {
-        float sign = Mathf.Sign(myPlayerPosition.x - transform.position.x);
-          
+
         Vector3 direction = Random.onUnitSphere;
-        direction.x = Mathf.Clamp(direction.x, 0.5f, 1f);
-        direction.y = Mathf.Clamp(direction.y, 0.5f, 1f);
-        float distance = 2.5f;
-        transform.position = new Vector3(myPlayerPosition.x + direction.x * distance * sign, myPlayerPosition.y + direction.y * distance,
+
+        if (direction.y < -0.2)
+        {
+            direction.y = -direction.y;
+        }
+
+        float distance = 4f;
+        transform.position = new Vector3(myPlayerPosition.x + direction.x * distance, myPlayerPosition.y + direction.y * distance,
                      myPlayerPosition.z + direction.z * distance);
     }
 

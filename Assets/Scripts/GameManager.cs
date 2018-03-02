@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class GameManager : Photon.MonoBehaviour {
 
     public GameObject[] memoryElements;
-    public int elementsNumber = 3;
+    public int elementsNumber = 0;
     public GameObject[] players;
 
     private int playerViewID;
@@ -64,26 +64,18 @@ public class GameManager : Photon.MonoBehaviour {
                         
                 foreach (GameObject p in players)
                 {
-                    int sign;
                     Vector3 direction = UnityEngine.Random.onUnitSphere;
                     int playerID= p.gameObject.GetPhotonView().viewID;
-                    float distance = 2.5f;
+                    float distance = 4f;
 
-                    if ((j % 2) == 0)
+                    if (direction.y < -0.2)
                     {
-                        sign = 1;
-                    }
-                    else
-                    {
-                        sign = -1;
+                        direction.y = -direction.y;
                     }
                     
-                    direction.x = Mathf.Clamp(direction.x, 0.5f, 1f);
-                    direction.y = UnityEngine.Random.Range(0.5f, 1f);
-                    Debug.Log(direction.y);
-                    GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3 (p.transform.position.x + direction.x*distance*sign, 
-                        p.transform.position.y + direction.y* distance, p.transform.position.z + direction.z* distance), Quaternion.identity, 0);
-
+                    GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3 (p.transform.position.x + direction.x * distance, 
+                        p.transform.position.y + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
+                    Debug.Log(p.transform.position.y + direction.y * distance);
                     memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index];
                     memoryElement.GetComponent<Teleport>().spriteIndex = index;
                     memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;

@@ -87,7 +87,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myPlayerPosition: {x: 0, y: 0, z: 0}
-  inactiveMaterial: {fileID: 2100000, guid: 188debc0a4cf42d45b9b98e8c4ed3f3d, type: 2}
+  inactiveMaterialNotMine: {fileID: 2100000, guid: 220806c578396d94f973b000c527686f,
+    type: 2}
+  inactiveMaterialMine: {fileID: 2100000, guid: 188debc0a4cf42d45b9b98e8c4ed3f3d,
+    type: 2}
   gazedAtMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   gazedAt: 0
   playerCube: 0

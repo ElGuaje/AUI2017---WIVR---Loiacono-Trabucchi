@@ -26,11 +26,11 @@ public class ServerMatchmaking : Photon.PunBehaviour
     {
         if (PhotonNetwork.playerList.Length == 1)
         {
-            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(0, 1.6f, 0), Quaternion.identity, 0);
+            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(0, 3f, 0), Quaternion.identity, 0);
         }
         else
         {
-            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(4f, 1.6f, 0), Quaternion.identity, 0);
+            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(7f, 3f, 0), Quaternion.identity, 0);
             StartGame();
         }
         currentPlayer.GetComponent<PlayerController>().isControllable = true;

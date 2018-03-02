@@ -19,5 +19,5 @@ MonoBehaviour:
     value: 6
     type: int
   - key: path
-    value: Emojis
+    value: Pokemons
     type: string
