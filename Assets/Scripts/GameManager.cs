@@ -9,6 +9,7 @@ public class GameManager : Photon.MonoBehaviour {
     public GameObject[] memoryElements;
     public int elementsNumber = 0;
     public GameObject[] players;
+    public bool differentObjects = false;
 
     private int playerViewID;
     private UnityAction startDeactivation;
@@ -25,8 +26,9 @@ public class GameManager : Photon.MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-        elementsNumber = RemoteSettings.GetInt("memoryElements");
+    void Start ()
+    {
+        elementsNumber = RemoteSettings.GetInt("elementsNumber");
         players = new GameObject[10];
         players = GameObject.FindGameObjectsWithTag("Player");
         spriteLoader = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>();
@@ -39,50 +41,105 @@ public class GameManager : Photon.MonoBehaviour {
 
         if (photonView.isMine)
         {
-            int[] indexes = new int[elementsNumber];
-            memoryElements = new GameObject[elementsNumber * 2];
-            for (int i = 0; i < elementsNumber; i++)
+            if (!differentObjects)
             {
-                int j = 0;
-                int index = 0;
-                bool isRepeated = true;
-                while (isRepeated)
+                int[] indexes = new int[elementsNumber];
+                memoryElements = new GameObject[elementsNumber * 2];
+                for (int i = 0; i < elementsNumber; i++)
                 {
-                    isRepeated = false;
-                    index = UnityEngine.Random.Range(0, spriteLoader.allSprites.Length);
-                    foreach(int l in indexes)
+                    int j = 0;
+                    int index = 0;
+                    bool isRepeated = true;
+                    while (isRepeated)
                     {
-                        if (l == index)
+                        isRepeated = false;
+                        index = UnityEngine.Random.Range(0, spriteLoader.allSprites.Length);
+                        foreach (int l in indexes)
                         {
-                            isRepeated = true;
-                            break;
+                            if (l == index)
+                            {
+                                isRepeated = true;
+                                break;
+                            }
                         }
                     }
-                }
 
-                indexes[i] = index;
-                        
-                foreach (GameObject p in players)
-                {
-                    Vector3 direction = UnityEngine.Random.onUnitSphere;
-                    int playerID= p.gameObject.GetPhotonView().viewID;
-                    float distance = 4f;
+                    indexes[i] = index;
 
-                    if (direction.y < -0.2)
+                    foreach (GameObject p in players)
                     {
-                        direction.y = -direction.y;
+                        Vector3 direction = UnityEngine.Random.onUnitSphere;
+                        int playerID = p.gameObject.GetPhotonView().viewID;
+                        float distance = 4f;
+
+                        if (direction.y < -0.2)
+                        {
+                            direction.y = -direction.y;
+                        }
+
+                        GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3(p.transform.position.x + direction.x * distance,
+                            p.transform.position.y + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
+                        Debug.Log(p.transform.position.y + direction.y * distance);
+                        memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index];
+                        memoryElement.GetComponent<Teleport>().spriteIndex = index;
+                        memoryElement.GetComponent<Teleport>().realIndex = index;
+                        memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
+                        memoryElement.GetComponent<Teleport>().playerCube = playerID;
+                        memoryElement.GetComponent<Teleport>().cubeNumber = i;
+
+                        j++;
                     }
-                    
-                    GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3 (p.transform.position.x + direction.x * distance, 
-                        p.transform.position.y + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
-                    Debug.Log(p.transform.position.y + direction.y * distance);
-                    memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index];
-                    memoryElement.GetComponent<Teleport>().spriteIndex = index;
-                    memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
-                    memoryElement.GetComponent<Teleport>().playerCube = playerID;
-                    memoryElement.GetComponent<Teleport>().cubeNumber = i;
-                                        
-                    j++;
+                }
+            }
+            else
+            {
+                int[] indexes = new int[elementsNumber];
+                memoryElements = new GameObject[elementsNumber * 2];
+                for (int i = 0; i < elementsNumber; i++)
+                {
+
+                    int index = 0;
+                    bool isRepeated = true;
+                    while (isRepeated)
+                    {
+                        isRepeated = false;
+                        index = UnityEngine.Random.Range(0, spriteLoader.allSprites.Length);
+                        foreach (int l in indexes)
+                        {
+                            if (l == index || index%2 == 1)
+                            {
+                                isRepeated = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    indexes[i] = index;
+                    int j = 0;
+                    foreach (GameObject p in players)
+                    {
+                        
+                        Vector3 direction = UnityEngine.Random.onUnitSphere;
+                        int playerID = p.gameObject.GetPhotonView().viewID;
+                        float distance = 4f;
+
+                        if (direction.y < -0.2)
+                        {
+                            direction.y = -direction.y;
+                        }
+
+                        GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3(p.transform.position.x + direction.x * distance,
+                            p.transform.position.y + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
+                        Debug.Log(index + j);
+                        Debug.Log(spriteLoader.allSprites[index + j]);
+                        memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index + j];
+                        memoryElement.GetComponent<Teleport>().spriteIndex = index;
+                        memoryElement.GetComponent<Teleport>().realIndex = index + j;
+                        memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
+                        memoryElement.GetComponent<Teleport>().playerCube = playerID;
+                        memoryElement.GetComponent<Teleport>().cubeNumber = i;
+                        j++;
+                    }
                 }
             }
             memoryElements = GameObject.FindGameObjectsWithTag("MemoryElement");
@@ -147,6 +204,7 @@ public class GameManager : Photon.MonoBehaviour {
 
         while (memoryElements[(elementsNumber*2-1)] == null)
         {
+            Debug.Log("Hello");
             memoryElements = GameObject.FindGameObjectsWithTag("MemoryElement");
             yield return null;
         }

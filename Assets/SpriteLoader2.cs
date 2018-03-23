@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpriteLoader : MonoBehaviour {
+public class SpriteLoader2 : MonoBehaviour {
 
     public Sprite[] allSprites;
     public List<Sprite> spriteList;
-    public string path;
+
 
     void Start()
     {
 
-        allSprites = Resources.LoadAll<Sprite>(RemoteSettings.GetString(path));
+        allSprites = Resources.LoadAll<Sprite>(RemoteSettings.GetString("path2"));
 
         Debug.Log("Hi boyz. We have: " + allSprites.Length);
     }
-
 }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Name: RemoteSettingsDataStore
   m_EditorClassIdentifier: 
   rsKeyList:
-  - key: numberOfImages
-    value: 10
-    type: int
-  - key: memoryElements
+  - key: path
+    value: Emojis
+    type: string
+  - key: path2
+    value: Ingredients-Foods
+    type: string
+  - key: elementsNumber
     value: 6
     type: int
-  - key: path
-    value: Pokemons
-    type: string

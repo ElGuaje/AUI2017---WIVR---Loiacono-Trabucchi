@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/MainWithPhoton.unity
+  - enabled: 0
+    path: Assets/Scenes/Level1-EqualObjects.unity
     guid: 7991a060feb213740ac320c8a41620dd
+  - enabled: 1
+    path: Assets/Scenes/Level2-DifferentObjects.unity
+    guid: cb060b77b3c648743ac40348dbf4a419

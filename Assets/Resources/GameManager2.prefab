@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114089752320873908}
   - component: {fileID: 114598177267935254}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameManager2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   memoryElements: []
   elementsNumber: 5
   players: []
-  differentObjects: 0
+  differentObjects: 1
 --- !u!114 &114598177267935254
 MonoBehaviour:
   m_ObjectHideFlags: 1

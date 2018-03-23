@@ -14,6 +14,7 @@ public class Teleport : Photon.MonoBehaviour {
     public int playerCube;
     public int cubeNumber;
     public int spriteIndex;
+    public int realIndex;
 
     void Start() {
         startingPosition = transform.localPosition;
@@ -101,13 +102,16 @@ public class Teleport : Photon.MonoBehaviour {
             // We own this player: send the others our data
             stream.SendNext(playerCube);
             stream.SendNext(spriteIndex);
+            stream.SendNext(realIndex);
+
         }
         else if (stream.isReading)
         {
             // Network player, receive data
             this.playerCube = (int)stream.ReceiveNext();
             this.spriteIndex = (int)stream.ReceiveNext();
-            this.GetComponent<SpriteRenderer>().sprite = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>().allSprites[spriteIndex];
+            this.realIndex = (int)stream.ReceiveNext();
+            this.GetComponent<SpriteRenderer>().sprite = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>().allSprites[realIndex];
         }
     }
 

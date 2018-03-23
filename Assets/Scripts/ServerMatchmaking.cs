@@ -10,6 +10,8 @@ public class ServerMatchmaking : Photon.PunBehaviour
 
     private GameObject currentPlayer;
 
+    public bool sameObject = false;
+
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings("0.1");
@@ -39,7 +41,10 @@ public class ServerMatchmaking : Photon.PunBehaviour
     private void StartGame()
     {
         PhotonNetwork.room.IsVisible = false;
-        PhotonNetwork.Instantiate("GameManager", new Vector3(0, 0, 0), Quaternion.identity, 0);
+        if (sameObject)
+            PhotonNetwork.Instantiate("GameManager", new Vector3(0, 0, 0), Quaternion.identity, 0);
+        else
+            PhotonNetwork.Instantiate("GameManager2", new Vector3(0, 0, 0), Quaternion.identity, 0);
     }
 
     // This is called if there is no one playing or if all rooms are full, so create a new room
