@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114535440321420452}
   - component: {fileID: 114591416993933266}
   - component: {fileID: 114764497287121400}
+  - component: {fileID: 114708185540218744}
   m_Layer: 0
   m_Name: MemoryElement
   m_TagString: MemoryElement
@@ -96,6 +97,7 @@ MonoBehaviour:
   playerCube: 0
   cubeNumber: 0
   spriteIndex: 0
+  realIndex: 0
 --- !u!114 &114461066985329702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,6 +220,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
+--- !u!114 &114708185540218744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046577368250380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f5d5b3288ad5247b989682bf627be8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovementActive: 0
+  speed: 0.1
 --- !u!114 &114764497287121400
 MonoBehaviour:
   m_ObjectHideFlags: 1
