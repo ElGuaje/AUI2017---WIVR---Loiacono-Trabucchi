@@ -409,6 +409,11 @@ Prefab:
       propertyPath: sameObject
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114541209320537874, guid: e866e6e6f9f027a4ea1645a0b91ea6b1,
+        type: 2}
+      propertyPath: movingObject
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e866e6e6f9f027a4ea1645a0b91ea6b1, type: 2}
   m_IsPrefabParent: 0

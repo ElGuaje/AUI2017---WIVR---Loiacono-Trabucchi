@@ -19,6 +19,16 @@ public class SpriteMover : MonoBehaviour {
         targetPosition = new Vector3(startingPosition.x + Random.Range(-2f, 2f), startingPosition.y + Random.Range(-2f, 2f),
             startingPosition.z + Random.Range(-2f, 2f));
         nextPosition = targetPosition;
+        gameObject.GetComponent<Teleport>().canTeleport = true;
+    }
+
+    public void Recalibrate()
+    {
+        startingPosition = gameObject.transform.position;
+        targetPosition = new Vector3(startingPosition.x + Random.Range(-2f, 2f), startingPosition.y + Random.Range(-2f, 2f),
+            startingPosition.z + Random.Range(-2f, 2f));
+        nextPosition = targetPosition;
+        gameObject.GetComponent<Teleport>().canTeleport = true;
     }
 
     // Update is called once per frame
@@ -50,5 +60,6 @@ public class SpriteMover : MonoBehaviour {
     public void ChangeDestination()
     {
         nextPosition = (nextPosition != startingPosition ? startingPosition : targetPosition);
+        gameObject.GetComponent<Teleport>().canTeleport = false;
     }
 }

@@ -15,6 +15,7 @@ public class Teleport : Photon.MonoBehaviour {
     public int cubeNumber;
     public int spriteIndex;
     public int realIndex;
+    public bool canTeleport = true;
 
     void Start() {
         startingPosition = transform.localPosition;
@@ -63,16 +64,20 @@ public class Teleport : Photon.MonoBehaviour {
     [PunRPC]
     public void TeleportRandomly() {
 
-        Vector3 direction = Random.onUnitSphere;
-
-        if (direction.y < -0.2)
+        if (canTeleport)
         {
-            direction.y = -direction.y;
-        }
+            Vector3 direction = Random.onUnitSphere;
 
-        float distance = 4f;
-        transform.position = new Vector3(myPlayerPosition.x + direction.x * distance, myPlayerPosition.y + direction.y * distance,
-                     myPlayerPosition.z + direction.z * distance);
+            if (direction.y < -0.1f)
+            {
+                direction.y = -direction.y;
+            }
+
+            float distance = 4f;
+            transform.position = new Vector3(myPlayerPosition.x + direction.x * distance, myPlayerPosition.y + direction.y * distance,
+                         myPlayerPosition.z + direction.z * distance);
+            gameObject.GetComponent<SpriteMover>().Recalibrate();
+        }
     }
 
     [PunRPC]

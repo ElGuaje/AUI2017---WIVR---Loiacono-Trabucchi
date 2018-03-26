@@ -10,6 +10,7 @@ public class GameManager : Photon.MonoBehaviour {
     public int elementsNumber = 0;
     public GameObject[] players;
     public bool differentObjects = false;
+    public bool movingObjects = false;
 
     private int playerViewID;
     private UnityAction startDeactivation;
@@ -72,20 +73,29 @@ public class GameManager : Photon.MonoBehaviour {
                         int playerID = p.gameObject.GetPhotonView().viewID;
                         float distance = 4f;
 
-                        if (direction.y < -0.2)
+                        if (direction.y < -0.1f)
                         {
                             direction.y = -direction.y;
                         }
 
+                       
                         GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3(p.transform.position.x + direction.x * distance,
                             p.transform.position.y + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
-                        Debug.Log(p.transform.position.y + direction.y * distance);
                         memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index];
                         memoryElement.GetComponent<Teleport>().spriteIndex = index;
                         memoryElement.GetComponent<Teleport>().realIndex = index;
                         memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
                         memoryElement.GetComponent<Teleport>().playerCube = playerID;
                         memoryElement.GetComponent<Teleport>().cubeNumber = i;
+
+                        if (movingObjects)
+                        {
+                            memoryElement.GetComponent<SpriteMover>().isMovementActive = true;
+                        }
+                        else
+                        {
+                            memoryElement.GetComponent<SpriteMover>().isMovementActive = false;
+                        }
 
                         j++;
                     }
@@ -123,15 +133,13 @@ public class GameManager : Photon.MonoBehaviour {
                         int playerID = p.gameObject.GetPhotonView().viewID;
                         float distance = 4f;
 
-                        if (direction.y < -0.2)
+                        if (direction.y < -0.1f)
                         {
                             direction.y = -direction.y;
                         }
 
                         GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3(p.transform.position.x + direction.x * distance,
                             p.transform.position.y + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
-                        Debug.Log(index + j);
-                        Debug.Log(spriteLoader.allSprites[index + j]);
                         memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index + j];
                         memoryElement.GetComponent<Teleport>().spriteIndex = index;
                         memoryElement.GetComponent<Teleport>().realIndex = index + j;
@@ -139,6 +147,15 @@ public class GameManager : Photon.MonoBehaviour {
                         memoryElement.GetComponent<Teleport>().playerCube = playerID;
                         memoryElement.GetComponent<Teleport>().cubeNumber = i;
                         j++;
+
+                        if (movingObjects)
+                        {
+                            memoryElement.GetComponent<SpriteMover>().isMovementActive = true;
+                        }
+                        else
+                        {
+                            memoryElement.GetComponent<SpriteMover>().isMovementActive = false;
+                        }
                     }
                 }
             }

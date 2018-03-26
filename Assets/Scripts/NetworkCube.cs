@@ -19,7 +19,7 @@ public class NetworkCube : Photon.MonoBehaviour
             cube.GetComponent<Teleport>().gazedAt = correctGazedAt;
             if (correctGazedAt)
             {
-                cube.GetComponent<Renderer>().material = cube.GetComponent<Teleport>().gazedAtMaterial;
+                cube.GetComponent<Renderer>().material = cube.GetComponent<Teleport>().inactiveMaterialNotMine;
             }
             else
             {
