@@ -11,6 +11,7 @@ public class GameManager : Photon.MonoBehaviour {
     public GameObject[] players;
     public bool differentObjects = false;
     public bool movingObjects = false;
+    public float minheight = 3;
 
     private int playerViewID;
     private UnityAction startDeactivation;
@@ -80,11 +81,12 @@ public class GameManager : Photon.MonoBehaviour {
 
                        
                         GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3(p.transform.position.x + direction.x * distance,
-                            p.transform.position.y + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
+                            minheight + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
                         memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index];
                         memoryElement.GetComponent<Teleport>().spriteIndex = index;
                         memoryElement.GetComponent<Teleport>().realIndex = index;
                         memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
+                        memoryElement.GetComponent<Teleport>().myPlayerPosition.y = minheight;
                         memoryElement.GetComponent<Teleport>().playerCube = playerID;
                         memoryElement.GetComponent<Teleport>().cubeNumber = i;
 
@@ -139,11 +141,12 @@ public class GameManager : Photon.MonoBehaviour {
                         }
 
                         GameObject memoryElement = PhotonNetwork.Instantiate("MemoryElement", new Vector3(p.transform.position.x + direction.x * distance,
-                            p.transform.position.y + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
+                            minheight + direction.y * distance, p.transform.position.z + direction.z * distance), Quaternion.identity, 0);
                         memoryElement.GetComponent<SpriteRenderer>().sprite = spriteLoader.allSprites[index + j];
                         memoryElement.GetComponent<Teleport>().spriteIndex = index;
                         memoryElement.GetComponent<Teleport>().realIndex = index + j;
                         memoryElement.GetComponent<Teleport>().myPlayerPosition = p.transform.position;
+                        memoryElement.GetComponent<Teleport>().myPlayerPosition.y = minheight;
                         memoryElement.GetComponent<Teleport>().playerCube = playerID;
                         memoryElement.GetComponent<Teleport>().cubeNumber = i;
                         j++;
@@ -161,8 +164,9 @@ public class GameManager : Photon.MonoBehaviour {
             }
             memoryElements = GameObject.FindGameObjectsWithTag("MemoryElement");
         }
+
         if (!photonView.isMine)
-            StartCoroutine("searchImages");
+            StartCoroutine("SearchImages");
         EventManager.StartListening("GazedAtEvent", startDeactivation);
         EventManager.StartListening("ElementFound", countElement);
 
@@ -214,7 +218,7 @@ public class GameManager : Photon.MonoBehaviour {
 
     }
 
-    IEnumerator searchImages()
+    IEnumerator SearchImages()
     {
         yield return new WaitForSeconds(1);
         memoryElements = new GameObject[elementsNumber * 2];
