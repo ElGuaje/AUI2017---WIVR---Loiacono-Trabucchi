@@ -98,6 +98,7 @@ MonoBehaviour:
   cubeNumber: 0
   spriteIndex: 0
   realIndex: 0
+  canTeleport: 1
 --- !u!114 &114461066985329702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -231,7 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f5d5b3288ad5247b989682bf627be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMovementActive: 1
+  isMovementActive: 0
+  isMoving: 1
   speed: 0.3
 --- !u!114 &114764497287121400
 MonoBehaviour:

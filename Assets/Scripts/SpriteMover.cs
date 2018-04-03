@@ -5,9 +5,11 @@ using UnityEngine;
 public class SpriteMover : MonoBehaviour {
 
     public bool isMovementActive = false;
+    public bool isMoving = true;
 
     [Range(0.1f,10f)]
     public float speed;
+
 
     private Vector3 startingPosition;
     private Vector3 targetPosition;
@@ -35,15 +37,18 @@ public class SpriteMover : MonoBehaviour {
     void Update () {
         if (isMovementActive)
         {
-            Move();
-        }
-        if (gameObject.GetComponent<Teleport>().gazedAt)
-        {
-            isMovementActive = false;
-        }
-        else
-        {
-            isMovementActive = true;
+            if (isMoving)
+            {
+                Move();
+            }
+            if (gameObject.GetComponent<Teleport>().gazedAt)
+            {
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = true;
+            }
         }
 	}
 
