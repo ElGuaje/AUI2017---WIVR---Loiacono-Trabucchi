@@ -225,7 +225,6 @@ public class GameManager : Photon.MonoBehaviour {
 
         while (memoryElements[(elementsNumber*2-1)] == null)
         {
-            Debug.Log("Hello");
             memoryElements = GameObject.FindGameObjectsWithTag("MemoryElement");
             yield return null;
         }
@@ -235,6 +234,16 @@ public class GameManager : Photon.MonoBehaviour {
             Debug.Log(playerViewID + " " + memoryElement.GetComponent<Teleport>().playerCube);
             if (playerViewID != memoryElement.GetComponent<Teleport>().playerCube)
                 memoryElement.GetComponent<Teleport>().RequestOwnership(memoryElement.GetComponent<Teleport>().playerCube);
+
+            if (movingObjects)
+            {
+                memoryElement.GetComponent<SpriteMover>().isMovementActive = true;
+            }
+            else
+            {
+                memoryElement.GetComponent<SpriteMover>().isMovementActive = false;
+            }
+
         }
 
     }
