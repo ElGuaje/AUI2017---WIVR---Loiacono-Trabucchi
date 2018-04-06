@@ -12,6 +12,7 @@ public class ServerMatchmaking : Photon.PunBehaviour
 
     public bool differentObjects = false;
     public bool movingObject = false;
+    public bool isCamerinus = false;
 
     void Start()
     {
@@ -34,7 +35,10 @@ public class ServerMatchmaking : Photon.PunBehaviour
         else
         {
             currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(7f, 3f, 0), Quaternion.identity, 0);
-            StartGame();
+            if (!isCamerinus)
+            {
+                StartGame();
+            }
         }
         currentPlayer.GetComponent<PlayerController>().isControllable = true;
     }
