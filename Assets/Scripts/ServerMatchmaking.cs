@@ -13,7 +13,7 @@ public class ServerMatchmaking : Photon.PunBehaviour
     public bool differentObjects = false;
     public bool movingObject = false;
     public bool isCamerinus = false;
-
+    
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings("0.1");
