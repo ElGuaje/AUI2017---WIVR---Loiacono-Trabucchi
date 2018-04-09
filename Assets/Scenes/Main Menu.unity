@@ -411,7 +411,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1986071520869726, guid: 8868da6a6bd37874082aec0091d07c04, type: 2}
       propertyPath: m_Name
-      value: MenuButton2 (1)
+      value: MenuButtonCamMe
       objectReference: {fileID: 0}
     - target: {fileID: 4393135812131670, guid: 8868da6a6bd37874082aec0091d07c04, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -598,7 +598,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1986071520869726, guid: 8868da6a6bd37874082aec0091d07c04, type: 2}
       propertyPath: m_Name
-      value: MenuButton3 (1)
+      value: MenuButtonCamYou
       objectReference: {fileID: 0}
     - target: {fileID: 4393135812131670, guid: 8868da6a6bd37874082aec0091d07c04, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -612,7 +612,7 @@ Prefab:
     - target: {fileID: 114876678892028000, guid: 8868da6a6bd37874082aec0091d07c04,
         type: 2}
       propertyPath: sceneToLoad
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224688430246053176, guid: 8868da6a6bd37874082aec0091d07c04,
         type: 2}
