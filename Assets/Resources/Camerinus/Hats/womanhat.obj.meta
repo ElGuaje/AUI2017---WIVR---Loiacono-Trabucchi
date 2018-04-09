@@ -1,0 +1,119 @@
+fileFormatVersion: 2
+guid: bc8fed8bfcde45c4db542c7d9fd53c19
+timeCreated: 1523281453
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:pCylinder1_hAT
+    100002: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1
+    100004: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Leaf
+    100006: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1
+    100008: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Leaf
+    100010: //RootNode
+    400000: DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:pCylinder1_hAT
+    400002: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1
+    400004: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Leaf
+    400006: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1
+    400008: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Leaf
+    400010: //RootNode
+    2100000: DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_pCylinder1_hATMat
+    2100002: hAT_DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_featherExotic1Main_DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_group1Mat
+    2100004: hAT_DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_group1_DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_featherExotic1LeafMat
+    2100006: hAT_DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_prefix_featherExotic1Main_DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_prefix_group1Mat
+    2100008: hAT_DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_prefix_group1_DIVA2_SOMBRERO_SOMBRERO_SOMBRERO_prefix_featherExotic1LeafMat
+    2300000: DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:pCylinder1_hAT
+    2300002: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1
+    2300004: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Leaf
+    2300006: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1
+    2300008: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Leaf
+    3300000: DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:pCylinder1_hAT
+    3300002: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1
+    3300004: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Leaf
+    3300006: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1
+    3300008: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Leaf
+    4300000: DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:pCylinder1_hAT
+    4300002: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1
+    4300004: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:featherExotic1Leaf
+    4300006: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Main_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1
+    4300008: hAT_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_group1_DIVA2:SOMBRERO:SOMBRERO:SOMBRERO:prefix_featherExotic1Leaf
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
