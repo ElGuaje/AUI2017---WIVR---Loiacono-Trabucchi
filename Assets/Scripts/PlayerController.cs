@@ -59,6 +59,10 @@ public class PlayerController : MonoBehaviour
             GameObject o = Instantiate(l, new Vector3(0, 0, 0), Quaternion.identity);
             Destroy(head.transform.GetChild(0).gameObject);
             o.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.5f, this.gameObject.transform.position.z);
+            if (!isControllable)
+            {
+                o.transform.rotation = head.transform.rotation;
+            }
             o.transform.parent = head.transform;
 
             GameObject l1 = Resources.Load<GameObject>("Camerinus/" + s1);
