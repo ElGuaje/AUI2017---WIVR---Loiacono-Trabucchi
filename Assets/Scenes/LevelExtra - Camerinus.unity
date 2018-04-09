@@ -395,6 +395,11 @@ Prefab:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114846328338459408, guid: 524b76ac4254bfb43948053f6aec2806,
+        type: 2}
+      propertyPath: isChangingMe
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 524b76ac4254bfb43948053f6aec2806, type: 2}
   m_IsPrefabParent: 0

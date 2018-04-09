@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         {
             playerCanvas.SetActive(false);
             playerCamera.SetActive(false);
+            EventManager.StartListening("ChangeYourAvatar", changeMyAvatar);
         }
     }
 
