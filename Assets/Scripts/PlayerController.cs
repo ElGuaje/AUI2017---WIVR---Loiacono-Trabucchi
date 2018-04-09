@@ -45,11 +45,26 @@ public class PlayerController : MonoBehaviour
         if (r.gameObject.GetComponent<AvatarSelection>() != null)
         {
             string s = r.gameObject.transform.GetChild(0).name;
+            string s1 = head.transform.GetChild(0).name;
+
+            if (s.LastIndexOf("(Clone)") != -1)
+                s = s.Substring(0, s.LastIndexOf("(Clone)"));
+
+            if (s1.LastIndexOf("(Clone)") != -1)
+                s1 = s1.Substring(0, s1.LastIndexOf("(Clone)"));
+
             GameObject l = Resources.Load<GameObject>("Camerinus/" + s);
+            Debug.Log(s);
             GameObject o = Instantiate(l, new Vector3(0, 0, 0), Quaternion.identity);
             Destroy(head.transform.GetChild(0).gameObject);
             o.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.5f, this.gameObject.transform.position.z);
             o.transform.parent = head.transform;
+
+            GameObject l1 = Resources.Load<GameObject>("Camerinus/" + s1);
+            GameObject o1 = Instantiate(l1, new Vector3(0, 0, 0), Quaternion.identity);
+            o1.transform.position = new Vector3(r.gameObject.transform.position.x, r.gameObject.transform.position.y, r.gameObject.transform.position.z);
+            o1.transform.parent = r.gameObject.transform;
+            Destroy(r.gameObject.transform.GetChild(0).gameObject);
         }
     }
 
