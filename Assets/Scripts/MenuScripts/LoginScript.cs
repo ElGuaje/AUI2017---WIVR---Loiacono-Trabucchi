@@ -18,6 +18,22 @@ public class LoginScript : MonoBehaviour
         }
     }
 
+    public void GoToOptions()
+    {
+        SceneManager.LoadScene("Options");
+    }
+
+    public void SaveAndReturn()
+    {
+        PlayerPrefs.SetInt("Timer", Convert.ToInt32(GameObject.Find("TimerToggle").GetComponent<Toggle>().isOn));
+        PlayerPrefs.SetInt("MovingObjects", Convert.ToInt32(GameObject.Find("MovingObjectsToggle").GetComponent<Toggle>().isOn));
+        PlayerPrefs.SetInt("DifferentObjects", Convert.ToInt32(GameObject.Find("DifferentObjectsToggle").GetComponent<Toggle>().isOn));
+        PlayerPrefs.SetInt("LevelAmbient", GameObject.Find("DropdownLevel").GetComponent<Dropdown>().value);
+        PlayerPrefs.SetInt("DropdownImages", GameObject.Find("DropdownImages").GetComponent<Dropdown>().value);
+
+        SceneManager.LoadScene("LoginScene");
+    }
+
     private IEnumerator DontFuckUp()
     {
         XRSettings.LoadDeviceByName("cardboard");

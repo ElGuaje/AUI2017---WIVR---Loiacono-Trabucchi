@@ -51,4 +51,6 @@ MonoBehaviour:
   - SendGameOver
   - ShowGameover
   - SaveGame
+  - DisableHighlighting
+  - EnableHighlighting
   DisableAutoOpenWizard: 1

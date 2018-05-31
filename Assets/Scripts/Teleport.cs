@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Collider))]
 public class Teleport : Photon.MonoBehaviour {
@@ -11,6 +12,7 @@ public class Teleport : Photon.MonoBehaviour {
     public Material inactiveMaterialMine;
     public Material gazedAtMaterial;
     public bool gazedAt;
+    public bool isDeactivating = false;
     public int playerCube;
     public int cubeNumber;
     public int spriteIndex;
@@ -40,6 +42,7 @@ public class Teleport : Photon.MonoBehaviour {
             else
             {
                 GetComponent<SpriteRenderer>().material = inactiveMaterialNotMine;
+                GetComponent<BoxCollider>().enabled = false;
                 EventManager.TriggerEvent("GazedAtEvent");
             }
         }
@@ -66,7 +69,7 @@ public class Teleport : Photon.MonoBehaviour {
 
         if (canTeleport)
         {
-            Vector3 direction = Random.onUnitSphere;
+            Vector3 direction = UnityEngine.Random.onUnitSphere;
 
             if (direction.y < -0.1f)
             {
@@ -123,5 +126,17 @@ public class Teleport : Photon.MonoBehaviour {
     public void RequestOwnership(int viewID)
     {
         photonView.TransferOwnership(viewID);
+    }
+
+    [PunRPC]
+    public void EnableHighlighting()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    [PunRPC]
+    public void DisableHighlighting()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 }

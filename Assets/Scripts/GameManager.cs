@@ -33,12 +33,10 @@ public class GameManager : Photon.MonoBehaviour {
         countElement = new UnityAction(CountElement);
     }
 
-
-
     // Use this for initialization
     void Start ()
     {
-        elementsNumber = 1; //RemoteSettings.GetInt("elementsNumber");
+        elementsNumber = 3; //RemoteSettings.GetInt("elementsNumber");
         players = new GameObject[10];
         players = GameObject.FindGameObjectsWithTag("Player");
         spriteLoader = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>();
@@ -223,12 +221,19 @@ public class GameManager : Photon.MonoBehaviour {
                     memoryElement1.GetComponent<Teleport>().spriteIndex == memoryElement2.GetComponent<Teleport>().spriteIndex
                     && memoryElement1.activeInHierarchy && memoryElement1.activeInHierarchy)
                 {
-                    Debug.Log("Urca");
-                    Debug.Log(memoryElement1.GetComponent<Teleport>().cubeNumber + " " + memoryElement2.GetComponent<Teleport>().cubeNumber);
+                    memoryElement1.GetComponent<Teleport>().photonView.RPC("EnableHighlighting", PhotonTargets.All);
+                    memoryElement2.GetComponent<Teleport>().photonView.RPC("EnableHighlighting", PhotonTargets.All);
+                    memoryElement1.GetComponent<Teleport>().isDeactivating = true;
+                    memoryElement2.GetComponent<Teleport>().isDeactivating = true;
                     StartCoroutine(DeactivateTimer(memoryElement1, memoryElement2));
                 }
-                else
+                else if (memoryElement1.GetComponent<Teleport>().isDeactivating && memoryElement2.GetComponent<Teleport>().isDeactivating)
                 {
+                    memoryElement1.GetComponent<Teleport>().photonView.RPC("DisableHighlighting", PhotonTargets.All);
+                    memoryElement2.GetComponent<Teleport>().photonView.RPC("DisableHighlighting", PhotonTargets.All);
+                    memoryElement1.GetComponent<Teleport>().isDeactivating = false;
+                    memoryElement2.GetComponent<Teleport>().isDeactivating = false;
+                    Debug.Log("I'm Stopping deac");
                     StopCoroutine("DeactivateTimer");
                 }
             }
@@ -251,7 +256,7 @@ public class GameManager : Photon.MonoBehaviour {
         foreach (GameObject memoryElement in memoryElements)
         {
             Debug.Log(playerViewID + " " + memoryElement.GetComponent<Teleport>().playerCube);
-            if (playerViewID != memoryElement.GetComponent<Teleport>().playerCube)
+            if (playerViewID != memoryElement.GetComponent<Teleport>().playerCube) 
                 memoryElement.GetComponent<Teleport>().RequestOwnership(memoryElement.GetComponent<Teleport>().playerCube);
 
             if (movingObjects)
@@ -262,17 +267,15 @@ public class GameManager : Photon.MonoBehaviour {
             {
                 memoryElement.GetComponent<SpriteMover>().isMovementActive = false;
             }
-
         }
 
     }
 
-    IEnumerator DeactivateTimer(GameObject memoeryElement1, GameObject memoeryElement2)
+    IEnumerator DeactivateTimer(GameObject memoryElement1, GameObject memoryElement2)
     {
-        Debug.Log("Deactivation Started");
         yield return new WaitForSeconds(3);
-        memoeryElement1.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
-        memoeryElement2.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
+        memoryElement1.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
+        memoryElement2.GetComponent<Teleport>().photonView.RPC("Deactivate", PhotonTargets.All);
 
     }
 
