@@ -74,9 +74,12 @@ public class NetworkPlayer : Photon.MonoBehaviour
     public void ShowGameover()
     {
         SoundManager.Instance.Fanfare();
-        canvas.GetComponentInChildren<Image>().enabled = true;
-        Text t = canvas.GetComponentInChildren<Text>();
-        t.text = "Hai Vinto!";
+        //canvas.GetComponentInChildren<Image>().enabled = true;
+        //Text t = canvas.GetComponentInChildren<Text>();
+        GameObject o = transform.GetChild(1).gameObject;
+        o.SetActive(true);
+        StartCoroutine(MoveFinalHead(o, new Vector3(transform.position.x, transform.position.y, transform.position.z - 6)));
+        //t.text = "Hai Vinto!";
     }
 
     [PunRPC]
@@ -88,5 +91,17 @@ public class NetworkPlayer : Photon.MonoBehaviour
         Debug.Log(PlayerPrefs.GetString("username") + " Time " + timer.GetComponentInChildren<Text>().text);
         sw.WriteLine(PlayerPrefs.GetString("username") + " Time " + timer.GetComponentInChildren<Text>().text);
         sw.Close();
+    }
+
+
+    private IEnumerator MoveFinalHead(GameObject o, Vector3 t)
+    {
+        yield return new WaitForSeconds(0.01f);
+        float f = Time.time;
+        while ((Time.time - f) < 6)
+        {
+            o.transform.position = Vector3.Lerp(o.transform.position, t, (Time.time - f)/3);
+            yield return null;
+        } 
     }
 }

@@ -26,6 +26,7 @@ public class GameManager : Photon.MonoBehaviour {
     private UnityAction countElement;
     private SpriteLoader spriteLoader;
     private int elementsFound = 0;
+    private Coroutine DeactivationCor = null;
 
     private void Awake()
     {
@@ -225,7 +226,7 @@ public class GameManager : Photon.MonoBehaviour {
                     memoryElement2.GetComponent<Teleport>().photonView.RPC("EnableHighlighting", PhotonTargets.All);
                     memoryElement1.GetComponent<Teleport>().isDeactivating = true;
                     memoryElement2.GetComponent<Teleport>().isDeactivating = true;
-                    StartCoroutine(DeactivateTimer(memoryElement1, memoryElement2));
+                    DeactivationCor = StartCoroutine(DeactivateTimer(memoryElement1, memoryElement2));
                 }
                 else if (memoryElement1.GetComponent<Teleport>().isDeactivating && memoryElement2.GetComponent<Teleport>().isDeactivating)
                 {
@@ -234,7 +235,7 @@ public class GameManager : Photon.MonoBehaviour {
                     memoryElement1.GetComponent<Teleport>().isDeactivating = false;
                     memoryElement2.GetComponent<Teleport>().isDeactivating = false;
                     Debug.Log("I'm Stopping deac");
-                    StopCoroutine("DeactivateTimer");
+                    StopCoroutine(DeactivationCor);
                 }
             }
         }
