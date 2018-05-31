@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,10 +15,13 @@ public class NetworkPlayer : Photon.MonoBehaviour
     private string headName;
     private Vector3 correctPlayerPos;
     private Quaternion correctPlayerRot = Quaternion.identity; // We lerp towards this
+    private StreamWriter sw;
+    private string myPath;
 
     void Start()
     {
         headName = otherPlayerHead.transform.GetChild(0).name;
+        myPath = Application.persistentDataPath;
     }
 
     void Update()
@@ -75,5 +79,14 @@ public class NetworkPlayer : Photon.MonoBehaviour
         t.text = "Hai Vinto!";
     }
 
+    [PunRPC]
+    public void SaveGame()
+    {
+        sw = new StreamWriter(myPath + "/ScoreFile.txt", append: true);
+        GameObject timer = GameObject.Find("Timer(Clone)");
 
+        Debug.Log(PlayerPrefs.GetString("username") + " Time " + timer.GetComponentInChildren<Text>().text);
+        sw.WriteLine(PlayerPrefs.GetString("username") + " Time " + timer.GetComponentInChildren<Text>().text);
+        sw.Close();
+    }
 }

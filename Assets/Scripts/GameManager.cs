@@ -3,14 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using System.IO;
 
 public class GameManager : Photon.MonoBehaviour {
 
     public GameObject[] memoryElements;
     public int elementsNumber = 0;
+
     public GameObject[] players;
+
     public bool differentObjects = false;
     public bool movingObjects = false;
+    public bool isTimed = true;
+
+    public GameObject timerPrefab;
+
     public float minheight = 3;
 
     private int playerViewID;
@@ -30,7 +38,7 @@ public class GameManager : Photon.MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        elementsNumber = RemoteSettings.GetInt("elementsNumber");
+        elementsNumber = 1; //RemoteSettings.GetInt("elementsNumber");
         players = new GameObject[10];
         players = GameObject.FindGameObjectsWithTag("Player");
         spriteLoader = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>();
@@ -170,6 +178,12 @@ public class GameManager : Photon.MonoBehaviour {
         EventManager.StartListening("GazedAtEvent", startDeactivation);
         EventManager.StartListening("ElementFound", countElement);
 
+        if (isTimed)
+        {
+            GameObject Timer = (GameObject)Instantiate(timerPrefab);
+            Timer.transform.position = new Vector3(0, 3, 30);
+        }
+
     }
 
     private void CountElement()
@@ -182,6 +196,11 @@ public class GameManager : Photon.MonoBehaviour {
                 foreach (GameObject p in players)
                 {
                     p.GetComponent<NetworkPlayer>().photonView.RPC("ShowGameover", PhotonTargets.All);
+                    if (isTimed)
+                    {
+                        timerPrefab.GetComponentInChildren<TimerScript>().StopTimer();
+                        p.GetComponent<NetworkPlayer>().photonView.RPC("SaveGame", PhotonTargets.All);
+                    }
                 }
             }
         }

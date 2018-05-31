@@ -57,6 +57,10 @@ MonoBehaviour:
   players: []
   differentObjects: 0
   movingObjects: 1
+  isTimed: 1
+  timerPrefab: {fileID: 1842241901827126, guid: 7edf580293a4cc84880de0dfe33f8c25,
+    type: 2}
+  minheight: 3
 --- !u!114 &114598177267935254
 MonoBehaviour:
   m_ObjectHideFlags: 1

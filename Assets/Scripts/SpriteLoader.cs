@@ -13,7 +13,6 @@ public class SpriteLoader : MonoBehaviour {
 
         allSprites = Resources.LoadAll<Sprite>(RemoteSettings.GetString(path));
 
-        Debug.Log("Hi boyz. We have: " + allSprites.Length);
     }
 
 }

@@ -74,7 +74,6 @@ public class Teleport : Photon.MonoBehaviour {
             }
 
             float distance = 4f;
-            Debug.Log(myPlayerPosition.y + " " + direction.y);
             transform.position = new Vector3(myPlayerPosition.x + direction.x * distance, 3 + direction.y * distance,
                          myPlayerPosition.z + direction.z * distance);
             gameObject.GetComponent<SpriteMover>().Recalibrate();
