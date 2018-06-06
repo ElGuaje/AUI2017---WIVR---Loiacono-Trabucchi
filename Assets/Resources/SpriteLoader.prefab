@@ -53,4 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allSprites: []
   spriteList: []
-  path: 
+  objectSet1Path: Emojis
+  objectSet2Path: Ingredients-Foods
+  objectSet3Path: Pokemons

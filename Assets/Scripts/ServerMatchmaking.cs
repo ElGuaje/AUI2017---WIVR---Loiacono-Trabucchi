@@ -10,10 +10,9 @@ public class ServerMatchmaking : Photon.PunBehaviour
 
     private GameObject currentPlayer;
 
-    public bool differentObjects = false;
-    public bool movingObject = false;
-    public bool isCamerinus = false;
-    
+    public Vector3 player1Position;
+    public Vector3 player2Position;
+
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings("0.1");
@@ -23,22 +22,23 @@ public class ServerMatchmaking : Photon.PunBehaviour
 
     public override void OnJoinedLobby()
     {
-        PhotonNetwork.JoinRandomRoom();
+        PhotonNetwork.JoinRoom(PlayerPrefs.GetInt("Timer").ToString() +
+        PlayerPrefs.GetInt("MovingObjects").ToString() +
+        PlayerPrefs.GetInt("DifferentObjects").ToString() +
+        PlayerPrefs.GetInt("LevelAmbient").ToString() +
+        PlayerPrefs.GetInt("DropdownImages").ToString());
     }
 
     public override void OnJoinedRoom()
     {
         if (PhotonNetwork.playerList.Length == 1)
         {
-            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(0, 3f, 0), Quaternion.identity, 0);
+            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", player1Position, Quaternion.identity, 0);
         }
         else
         {
-            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", new Vector3(7f, 3f, 0), Quaternion.identity, 0);
-            if (!isCamerinus)
-            {
-                StartGame();
-            }
+            currentPlayer = PhotonNetwork.Instantiate("PhotonPlayer", player2Position, Quaternion.identity, 0);
+            StartGame();
         }
         currentPlayer.GetComponent<PlayerController>().isControllable = true;
     }
@@ -46,20 +46,18 @@ public class ServerMatchmaking : Photon.PunBehaviour
     private void StartGame()
     {
         PhotonNetwork.room.IsVisible = false;
-        if (differentObjects)
-            PhotonNetwork.Instantiate("GameManager2", new Vector3(0, 0, 0), Quaternion.identity, 0);
-        else if (movingObject)
-            PhotonNetwork.Instantiate("GameManager3", new Vector3(0, 0, 0), Quaternion.identity, 0);
-        else
-            PhotonNetwork.Instantiate("GameManager", new Vector3(0, 0, 0), Quaternion.identity, 0);
-
+        PhotonNetwork.Instantiate("GameManager", new Vector3(0, 0, 0), Quaternion.identity, 0);
     }
 
     // This is called if there is no one playing or if all rooms are full, so create a new room
-    void OnPhotonRandomJoinFailed()
+    void OnPhotonJoinRoomFailed()
     {
         Debug.Log("Can't join random room!");
-        PhotonNetwork.CreateRoom(null);
+        PhotonNetwork.CreateRoom(PlayerPrefs.GetInt("Timer").ToString() +
+        PlayerPrefs.GetInt("MovingObjects").ToString() +
+        PlayerPrefs.GetInt("DifferentObjects").ToString() +
+        PlayerPrefs.GetInt("LevelAmbient").ToString() +
+        PlayerPrefs.GetInt("DropdownImages").ToString());
     }
 
 }

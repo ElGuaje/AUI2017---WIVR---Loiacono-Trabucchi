@@ -51,6 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a226cc6281c8c4a4793eaab760cc29d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  differentObjects: 0
-  movingObject: 0
-  isCamerinus: 0
+  player1Position: {x: 0, y: 3, z: 0}
+  player2Position: {x: 7, y: 3, z: 0}

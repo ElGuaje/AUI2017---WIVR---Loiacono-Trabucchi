@@ -6,13 +6,28 @@ public class SpriteLoader : MonoBehaviour {
 
     public Sprite[] allSprites;
     public List<Sprite> spriteList;
-    public string path;
+    public string objectSet1Path;
+    public string objectSet2Path;
+    public string objectSet3Path;
+
+    private int dropdownImages;
 
     void Start()
     {
+        dropdownImages = PlayerPrefs.GetInt("DropdownImages");
 
-        allSprites = Resources.LoadAll<Sprite>(RemoteSettings.GetString(path));
-
+        if (dropdownImages == 0)
+        {
+            allSprites = Resources.LoadAll<Sprite>(objectSet1Path);
+        }
+        else if (dropdownImages == 1)
+        {
+            allSprites = Resources.LoadAll<Sprite>(objectSet2Path);
+        }
+        else if (dropdownImages == 2)
+        {
+            allSprites = Resources.LoadAll<Sprite>(objectSet3Path);
+        }
     }
 
 }

@@ -247,7 +247,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Oggetti Uguali
+  m_Text: Inizia Gioco
 --- !u!114 &114403877221846038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,7 +296,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df092ddd479af84986ba95b3e5fe8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: 2
+  level1Scene: 4
+  level2Scene: 5
+  level3Scene: 6
 --- !u!222 &222860514661128666
 CanvasRenderer:
   m_ObjectHideFlags: 1

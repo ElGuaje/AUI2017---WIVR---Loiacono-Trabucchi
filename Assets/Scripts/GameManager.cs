@@ -9,13 +9,13 @@ using System.IO;
 public class GameManager : Photon.MonoBehaviour {
 
     public GameObject[] memoryElements;
-    public int elementsNumber = 0;
+    public int elementsNumber;
 
     public GameObject[] players;
 
-    public bool differentObjects = false;
-    public bool movingObjects = false;
-    public bool isTimed = true;
+    public bool isDifferentObjects;
+    public bool isMovingObjects;
+    public bool isTimed;
 
     public GameObject timerPrefab;
 
@@ -32,12 +32,15 @@ public class GameManager : Photon.MonoBehaviour {
     {
         startDeactivation = new UnityAction(StartDeactivation);
         countElement = new UnityAction(CountElement);
+        elementsNumber = PlayerPrefs.GetInt("NumberOfImages");
+        isDifferentObjects = PlayerPrefs.GetInt("DifferentObjects") != 0;
+        isMovingObjects = PlayerPrefs.GetInt("MovingObjects") != 0;
+        isTimed = PlayerPrefs.GetInt("Timer") != 0;
     }
 
     // Use this for initialization
     void Start ()
     {
-        elementsNumber = 3; //RemoteSettings.GetInt("elementsNumber");
         players = new GameObject[10];
         players = GameObject.FindGameObjectsWithTag("Player");
         spriteLoader = GameObject.FindGameObjectWithTag("SpriteLoader").GetComponent<SpriteLoader>();
@@ -50,7 +53,7 @@ public class GameManager : Photon.MonoBehaviour {
 
         if (photonView.isMine)
         {
-            if (!differentObjects)
+            if (!isDifferentObjects)
             {
                 int[] indexes = new int[elementsNumber];
                 memoryElements = new GameObject[elementsNumber * 2];
@@ -97,7 +100,7 @@ public class GameManager : Photon.MonoBehaviour {
                         memoryElement.GetComponent<Teleport>().playerCube = playerID;
                         memoryElement.GetComponent<Teleport>().cubeNumber = i;
 
-                        if (movingObjects)
+                        if (isMovingObjects)
                         {
                             memoryElement.GetComponent<SpriteMover>().isMovementActive = true;
                         }
@@ -158,7 +161,7 @@ public class GameManager : Photon.MonoBehaviour {
                         memoryElement.GetComponent<Teleport>().cubeNumber = i;
                         j++;
 
-                        if (movingObjects)
+                        if (isMovingObjects)
                         {
                             memoryElement.GetComponent<SpriteMover>().isMovementActive = true;
                         }
@@ -260,7 +263,7 @@ public class GameManager : Photon.MonoBehaviour {
             if (playerViewID != memoryElement.GetComponent<Teleport>().playerCube) 
                 memoryElement.GetComponent<Teleport>().RequestOwnership(memoryElement.GetComponent<Teleport>().playerCube);
 
-            if (movingObjects)
+            if (isMovingObjects)
             {
                 memoryElement.GetComponent<SpriteMover>().isMovementActive = true;
             }
