@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
         RaycastResult r = GvrPointerInputModule.CurrentRaycastResult;
         if (r.gameObject.GetComponent<AvatarSelection>() != null)
         {
+            Quaternion rot = r.gameObject.transform.rotation;
             string s = r.gameObject.transform.GetChild(0).name;
             string s1 = head.transform.GetChild(0).name;
 
@@ -68,6 +69,10 @@ public class PlayerController : MonoBehaviour
                 s1 = s1.Substring(0, s1.LastIndexOf("(Clone)"));
 
             GameObject l = Resources.Load<GameObject>("Camerinus/" + s);
+            //added for avatar selection memory
+            PlayerPrefs.SetString("Chosen Avatar", l.name);
+            PlayerPrefs.Save();
+            //----------
             Debug.Log(s);
             GameObject o = Instantiate(l, new Vector3(0, 0, 0), playerCamera.transform.rotation);
             Destroy(head.transform.GetChild(0).gameObject);
@@ -79,7 +84,7 @@ public class PlayerController : MonoBehaviour
             o.transform.parent = head.transform;
 
             GameObject l1 = Resources.Load<GameObject>("Camerinus/" + s1);
-            GameObject o1 = Instantiate(l1, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject o1 = Instantiate(l1, new Vector3(0, 0, 0), rot);
             o1.transform.position = new Vector3(r.gameObject.transform.position.x, r.gameObject.transform.position.y, r.gameObject.transform.position.z);
             o1.transform.parent = r.gameObject.transform;
             Destroy(r.gameObject.transform.GetChild(0).gameObject);
