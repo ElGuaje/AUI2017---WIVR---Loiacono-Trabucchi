@@ -29,7 +29,11 @@ public class PlayerController : MonoBehaviour
         if (isControllable)
         {
             playerCamera.SetActive(true);
-            head.SetActive(false);
+            //modified for changingroom
+            if (!SceneManagerHelper.ActiveSceneName.Equals("LevelExtra - CamerinusForMe"))
+            {
+                head.SetActive(false);
+            }
             EventManager.StartListening("ChangeMyAvatar", changeMyAvatar);
         }
         else
@@ -37,6 +41,15 @@ public class PlayerController : MonoBehaviour
             playerCanvas.SetActive(false);
             playerCamera.SetActive(false);
             EventManager.StartListening("ChangeYourAvatar", changeMyAvatar);
+        }
+    }
+
+    //added for changingroom
+    private void Update()
+    {
+        if(SceneManagerHelper.ActiveSceneName.Equals("LevelExtra - CamerinusForMe"))
+        {
+            head.transform.SetPositionAndRotation(head.transform.position, playerCamera.transform.rotation);
         }
     }
 
@@ -56,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
             GameObject l = Resources.Load<GameObject>("Camerinus/" + s);
             Debug.Log(s);
-            GameObject o = Instantiate(l, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject o = Instantiate(l, new Vector3(0, 0, 0), playerCamera.transform.rotation);
             Destroy(head.transform.GetChild(0).gameObject);
             o.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.5f, this.gameObject.transform.position.z);
             if (!isControllable)
