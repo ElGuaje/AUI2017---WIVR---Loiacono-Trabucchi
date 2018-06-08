@@ -1,0 +1,213 @@
+fileFormatVersion: 2
+guid: 1b217aec54f04fe4d8d3f1eb0f807c53
+timeCreated: 1528479009
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: braid
+    100002: braid_1
+    100004: braid_2
+    100006: braid_3
+    100008: braid_strand
+    100010: braid_strand_1
+    100012: braid_strand_10
+    100014: braid_strand_11
+    100016: braid_strand_2
+    100018: braid_strand_3
+    100020: braid_strand_4
+    100022: braid_strand_5
+    100024: braid_strand_6
+    100026: braid_strand_7
+    100028: braid_strand_8
+    100030: braid_strand_9
+    100032: braids
+    100034: //RootNode
+    100036: instance_0
+    100038: instance_1
+    100040: instance_10
+    100042: instance_11
+    100044: instance_12
+    100046: instance_13
+    100048: instance_14
+    100050: instance_15
+    100052: instance_16
+    100054: instance_2
+    100056: instance_3
+    100058: instance_4
+    100060: instance_5
+    100062: instance_6
+    100064: instance_7
+    100066: instance_8
+    100068: instance_9
+    100070: skp_camera_Last_Saved_SketchUp_View
+    400000: braid
+    400002: braid_1
+    400004: braid_2
+    400006: braid_3
+    400008: braid_strand
+    400010: braid_strand_1
+    400012: braid_strand_10
+    400014: braid_strand_11
+    400016: braid_strand_2
+    400018: braid_strand_3
+    400020: braid_strand_4
+    400022: braid_strand_5
+    400024: braid_strand_6
+    400026: braid_strand_7
+    400028: braid_strand_8
+    400030: braid_strand_9
+    400032: braids
+    400034: //RootNode
+    400036: instance_0
+    400038: instance_1
+    400040: instance_10
+    400042: instance_11
+    400044: instance_12
+    400046: instance_13
+    400048: instance_14
+    400050: instance_15
+    400052: instance_16
+    400054: instance_2
+    400056: instance_3
+    400058: instance_4
+    400060: instance_5
+    400062: instance_6
+    400064: instance_7
+    400066: instance_8
+    400068: instance_9
+    400070: skp_camera_Last_Saved_SketchUp_View
+    2000000: skp_camera_Last_Saved_SketchUp_View
+    2100000: blond_hair
+    2100002: brown_hair
+    2100004: black_hair
+    2100006: red_hair
+    2300000: braid
+    2300002: braid_1
+    2300004: braid_2
+    2300006: braid_3
+    2300008: braid_strand
+    2300010: braid_strand_1
+    2300012: braid_strand_10
+    2300014: braid_strand_11
+    2300016: braid_strand_2
+    2300018: braid_strand_3
+    2300020: braid_strand_4
+    2300022: braid_strand_5
+    2300024: braid_strand_6
+    2300026: braid_strand_7
+    2300028: braid_strand_8
+    2300030: braid_strand_9
+    3300000: braid
+    3300002: braid_1
+    3300004: braid_2
+    3300006: braid_3
+    3300008: braid_strand
+    3300010: braid_strand_1
+    3300012: braid_strand_10
+    3300014: braid_strand_11
+    3300016: braid_strand_2
+    3300018: braid_strand_3
+    3300020: braid_strand_4
+    3300022: braid_strand_5
+    3300024: braid_strand_6
+    3300026: braid_strand_7
+    3300028: braid_strand_8
+    3300030: braid_strand_9
+    4300000: braid
+    4300002: braid_strand
+    4300004: braid_strand_1
+    4300006: braid_strand_2
+    4300008: braid_2
+    4300010: braid_strand_5
+    4300012: braid_strand_3
+    4300014: braid_strand_4
+    4300016: braid_1
+    4300018: braid_strand_6
+    4300020: braid_strand_8
+    4300022: braid_strand_7
+    4300024: braid_3
+    4300026: braid_strand_9
+    4300028: braid_strand_11
+    4300030: braid_strand_10
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
