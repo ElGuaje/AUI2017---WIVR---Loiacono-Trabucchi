@@ -4434,17 +4434,17 @@ Prefab:
     - target: {fileID: 114876678892028000, guid: 8868da6a6bd37874082aec0091d07c04,
         type: 2}
       propertyPath: level1Scene
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114876678892028000, guid: 8868da6a6bd37874082aec0091d07c04,
         type: 2}
       propertyPath: level2Scene
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114876678892028000, guid: 8868da6a6bd37874082aec0091d07c04,
         type: 2}
       propertyPath: level3Scene
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 224559439959211858, guid: 8868da6a6bd37874082aec0091d07c04,
         type: 2}

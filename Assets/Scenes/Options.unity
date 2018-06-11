@@ -1096,11 +1096,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Livello al chiuso
+    - m_Text: Livello Classico
       m_Image: {fileID: 0}
-    - m_Text: Livello all' aperto
+    - m_Text: Livello Collina
       m_Image: {fileID: 0}
-    - m_Text: Livello classico
+    - m_Text: Livello Castello
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1459,7 +1459,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Livello al chiuso
+  m_Text: Livello Classico
 --- !u!222 &431199882
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2942,7 +2942,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Ingredienti
       m_Image: {fileID: 0}
-    - m_Text: Faccine
+    - m_Text: Pokemon
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
