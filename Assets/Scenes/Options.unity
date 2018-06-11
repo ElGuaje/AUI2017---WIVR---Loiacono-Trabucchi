@@ -2936,9 +2936,13 @@ MonoBehaviour:
     m_Options:
     - m_Text: Faccine
       m_Image: {fileID: 0}
-    - m_Text: Ingredienti
+    - m_Text: Ingredienti (Diversi)
       m_Image: {fileID: 0}
     - m_Text: Pokemon
+      m_Image: {fileID: 0}
+    - m_Text: Immagini Ragazzi (Uguali)
+      m_Image: {fileID: 0}
+    - m_Text: Immagini Ragazzi (Diversi)
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

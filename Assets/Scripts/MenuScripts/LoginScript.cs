@@ -46,7 +46,7 @@ public class LoginScript : MonoBehaviour
         if (PlayerPrefs.GetInt("NumberOfImages") == 0)
             PlayerPrefs.SetInt("NumberOfImages", 1);
 
-        if (PlayerPrefs.GetInt("DropdownImages") == 1)
+        if (PlayerPrefs.GetInt("DropdownImages") == 1 || PlayerPrefs.GetInt("DropdownImages") == 4)
         {
             PlayerPrefs.SetInt("DifferentObjects", 1);
         }
