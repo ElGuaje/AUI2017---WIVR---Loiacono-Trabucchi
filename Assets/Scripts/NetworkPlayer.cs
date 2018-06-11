@@ -80,6 +80,7 @@ public class NetworkPlayer : Photon.MonoBehaviour
         o.SetActive(true);
         StartCoroutine(MoveFinalHead(o, new Vector3(transform.position.x, transform.position.y, transform.position.z - 6)));
         //t.text = "Hai Vinto!";
+        GameObject.Find("ButtonGoToMainMenu").SetActive(true);
     }
 
     [PunRPC]
