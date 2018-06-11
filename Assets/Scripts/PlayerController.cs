@@ -26,13 +26,13 @@ public class PlayerController : MonoBehaviour
     {
         changeMyAvatar = new UnityAction(ChangeMyAvatar);
 
-        SelectInitialHead();
 
         if (isControllable)
         {
             playerCamera.SetActive(true);
             head.SetActive(false);
             EventManager.StartListening("ChangeMyAvatar", changeMyAvatar);
+            SelectInitialHead();
         }
         else
         {
