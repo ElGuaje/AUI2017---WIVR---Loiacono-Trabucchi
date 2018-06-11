@@ -52,6 +52,7 @@ public class NetworkPlayer : Photon.MonoBehaviour
             string n = (string)stream.ReceiveNext();
             if (!n.Equals(headName))
             {
+                Debug.Log(correctPlayerRot);
                 headName = n;
                 n = n.Substring(0, n.LastIndexOf("(Clone)"));
                 ChangeThisAvatar(n);
@@ -66,7 +67,7 @@ public class NetworkPlayer : Photon.MonoBehaviour
         GameObject o = Instantiate(l, new Vector3(0, 0, 0), Quaternion.identity);
         Destroy(otherPlayerHead.transform.GetChild(0).gameObject);
         o.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.5f, this.gameObject.transform.position.z);
-        o.transform.rotation = this.correctPlayerRot;
+        o.transform.rotation = Quaternion.Euler(0, 0, 0);
         o.transform.parent = otherPlayerHead.transform;
     }
 
