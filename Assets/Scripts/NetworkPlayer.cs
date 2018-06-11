@@ -75,19 +75,22 @@ public class NetworkPlayer : Photon.MonoBehaviour
     {
         SoundManager.Instance.Fanfare();
         GameObject o = Resources.Load<GameObject>("ButtonGoToMainMenu");
-        GameObject l = Instantiate(o, new Vector3(3.5f, 3f, - 8f), Quaternion.identity);
+        GameObject l = Instantiate(o, new Vector3(3.5f, 3f, - 8f), Quaternion.Euler(0, 90, 90));
         SaveGame();
     }
 
     [PunRPC]
     public void SaveGame()
     {
-        sw = new StreamWriter(myPath + "/ScoreFile.txt", append: true);
-        GameObject timer = GameObject.Find("Timer(Clone)");
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().isTimed)
+        {
+            sw = new StreamWriter(myPath + "/ScoreFile.txt", append: true);
+            GameObject timer = GameObject.Find("Timer(Clone)");
 
-        Debug.Log(PlayerPrefs.GetString("username") + " Time " + timer.GetComponentInChildren<Text>().text);
-        sw.WriteLine(PlayerPrefs.GetString("username") + " Time " + timer.GetComponentInChildren<Text>().text);
-        sw.Close();
+            Debug.Log(PlayerPrefs.GetString("username") + " Time " + timer.GetComponentInChildren<Text>().text);
+            sw.WriteLine(PlayerPrefs.GetString("username") + " Time " + timer.GetComponentInChildren<Text>().text);
+            sw.Close();
+        }
     }
 
 
