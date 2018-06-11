@@ -23,10 +23,7 @@ public class PlayerController : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
-        changeMyAvatar = new UnityAction(ChangeMyAvatar);
-
-
+    {       
         if (isControllable)
         {
             playerCamera.SetActive(true);
@@ -53,53 +50,6 @@ public class PlayerController : MonoBehaviour
             o.transform.rotation = head.transform.rotation;
         }
         o.transform.parent = head.transform;
-    }
-
-    //added for changingroom
-    private void Update()
-    {
-        if(SceneManagerHelper.ActiveSceneName.Equals("LevelExtra - CamerinusForMe"))
-        {
-            head.transform.SetPositionAndRotation(head.transform.position, playerCamera.transform.rotation);
-        }
-    }
-
-    private void ChangeMyAvatar()
-    {
-        RaycastResult r = GvrPointerInputModule.CurrentRaycastResult;
-        if (r.gameObject.GetComponent<AvatarSelection>() != null)
-        {
-            Quaternion rot = r.gameObject.transform.rotation;
-            string s = r.gameObject.transform.GetChild(0).name;
-            string s1 = head.transform.GetChild(0).name;
-
-            if (s.LastIndexOf("(Clone)") != -1)
-                s = s.Substring(0, s.LastIndexOf("(Clone)"));
-
-            if (s1.LastIndexOf("(Clone)") != -1)
-                s1 = s1.Substring(0, s1.LastIndexOf("(Clone)"));
-
-            GameObject l = Resources.Load<GameObject>("Camerinus/" + s);
-            //added for avatar selection memory
-            PlayerPrefs.SetString("Chosen Avatar", l.name);
-            PlayerPrefs.Save();
-            //----------
-            Debug.Log(s);
-            GameObject o = Instantiate(l, new Vector3(0, 0, 0), playerCamera.transform.rotation);
-            Destroy(head.transform.GetChild(0).gameObject);
-            o.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1.5f, this.gameObject.transform.position.z);
-            if (!isControllable)
-            {
-                o.transform.rotation = head.transform.rotation;
-            }
-            o.transform.parent = head.transform;
-
-            GameObject l1 = Resources.Load<GameObject>("Camerinus/" + s1);
-            GameObject o1 = Instantiate(l1, new Vector3(0, 0, 0), rot);
-            o1.transform.position = new Vector3(r.gameObject.transform.position.x, r.gameObject.transform.position.y, r.gameObject.transform.position.z);
-            o1.transform.parent = r.gameObject.transform;
-            Destroy(r.gameObject.transform.GetChild(0).gameObject);
-        }
     }
 
 }

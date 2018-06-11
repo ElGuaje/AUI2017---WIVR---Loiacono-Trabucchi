@@ -30,7 +30,7 @@ public class CameinusController : MonoBehaviour {
         //head.transform.SetPositionAndRotation(head.transform.position, playerCamera.transform.rotation);
 
         head.transform.rotation = Quaternion.Euler(playerCamera.transform.rotation.eulerAngles.x, 
-            180 - playerCamera.transform.rotation.eulerAngles.y, playerCamera.transform.rotation.eulerAngles.z);
+            180 - playerCamera.transform.rotation.eulerAngles.y, - playerCamera.transform.rotation.eulerAngles.z);
 
     }
 

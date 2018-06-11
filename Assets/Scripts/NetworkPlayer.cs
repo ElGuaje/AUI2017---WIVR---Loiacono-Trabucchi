@@ -75,7 +75,7 @@ public class NetworkPlayer : Photon.MonoBehaviour
     {
         SoundManager.Instance.Fanfare();
         GameObject o = Resources.Load<GameObject>("ButtonGoToMainMenu");
-        GameObject l = Instantiate(o, new Vector3(3.5f, 3f, -8), Quaternion.identity);
+        GameObject l = Instantiate(o, new Vector3(3.5f, 3f, - 8f), Quaternion.identity);
         SaveGame();
     }
 
