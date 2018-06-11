@@ -74,13 +74,9 @@ public class NetworkPlayer : Photon.MonoBehaviour
     public void ShowGameover()
     {
         SoundManager.Instance.Fanfare();
-        //canvas.GetComponentInChildren<Image>().enabled = true;
-        //Text t = canvas.GetComponentInChildren<Text>();
-        GameObject o = transform.GetChild(1).gameObject;
-        o.SetActive(true);
-        StartCoroutine(MoveFinalHead(o, new Vector3(transform.position.x, transform.position.y, transform.position.z - 6)));
-        //t.text = "Hai Vinto!";
-        GameObject.Find("ButtonGoToMainMenu").SetActive(true);
+        GameObject o = Resources.Load<GameObject>("ButtonGoToMainMenu");
+        GameObject l = Instantiate(o, new Vector3(3.5f, 3f, -8), Quaternion.identity);
+        SaveGame();
     }
 
     [PunRPC]
