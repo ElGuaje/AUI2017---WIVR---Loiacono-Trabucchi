@@ -42,7 +42,7 @@ public class LoginScript : MonoBehaviour
         PlayerPrefs.SetInt("MovingObjects", Convert.ToInt32(GameObject.Find("MovingObjectsToggle").GetComponent<Toggle>().isOn));
         PlayerPrefs.SetInt("LevelAmbient", GameObject.Find("DropdownLevel").GetComponent<Dropdown>().value);
         PlayerPrefs.SetInt("DropdownImages", GameObject.Find("DropdownImages").GetComponent<Dropdown>().value);
-        PlayerPrefs.SetInt("NumberOfImages", int.Parse(GameObject.Find("NumberOfImages").transform.GetChild(2).GetComponent<Text>().text));
+        PlayerPrefs.SetInt("NumberOfImages", GameObject.Find("NumberOfImages").GetComponent<Dropdown>().value);
         if (PlayerPrefs.GetInt("NumberOfImages") == 0)
             PlayerPrefs.SetInt("NumberOfImages", 1);
 

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 29b510366a2b0e94fb4d0e33b3cce7dd
   - enabled: 1
+    path: Assets/Scenes/LevelExtra - CamerinusForMe.unity
+    guid: f0e1e888177ddf842b58a61e726bdcea
+  - enabled: 1
     path: Assets/Scenes/Level1-BaseLevel.unity
     guid: 7991a060feb213740ac320c8a41620dd
   - enabled: 1
