@@ -5,13 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class BackToMainMenu : MonoBehaviour {
 
-    private int levelToLoad;
-
-    // Use this for initialization
-    void Start()
-    {
-        levelToLoad = SceneManager.GetSceneByName("Main Menu").buildIndex;
-    }
+    public int levelToLoad;
 
     public void SetGazedAt(bool isGazed)
     {

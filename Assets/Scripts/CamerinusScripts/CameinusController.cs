@@ -51,7 +51,7 @@ public class CameinusController : MonoBehaviour {
 
             GameObject l = Resources.Load<GameObject>("Camerinus/" + s);
             //added for avatar selection memory
-            PlayerPrefs.SetString("ChosenAvatar", l.name);
+            PlayerPrefs.SetString("ChosenAvatar", "Camerinus/" + s);
             PlayerPrefs.Save();
             //----------
             Debug.Log(s);

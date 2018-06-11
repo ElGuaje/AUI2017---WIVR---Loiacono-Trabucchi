@@ -1156,7 +1156,6 @@ MonoBehaviour:
   head: {fileID: 1966427360189422}
   playerCamera: {fileID: 1184339117007118}
   playerCanvas: {fileID: 1114065357040780}
-  isControllable: 0
 --- !u!114 &114383806153516354
 MonoBehaviour:
   m_ObjectHideFlags: 1

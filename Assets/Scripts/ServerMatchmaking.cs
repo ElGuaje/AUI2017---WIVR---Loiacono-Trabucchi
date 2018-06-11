@@ -23,6 +23,7 @@ public class ServerMatchmaking : Photon.PunBehaviour
     public override void OnJoinedLobby()
     {
         PhotonNetwork.JoinRoom(PlayerPrefs.GetInt("Timer").ToString() +
+        PlayerPrefs.GetInt("NumberOfImages").ToString() +
         PlayerPrefs.GetInt("MovingObjects").ToString() +
         PlayerPrefs.GetInt("DifferentObjects").ToString() +
         PlayerPrefs.GetInt("LevelAmbient").ToString() +
@@ -54,6 +55,7 @@ public class ServerMatchmaking : Photon.PunBehaviour
     {
         Debug.Log("Can't join random room!");
         PhotonNetwork.CreateRoom(PlayerPrefs.GetInt("Timer").ToString() +
+        PlayerPrefs.GetInt("NumberOfImages").ToString() + 
         PlayerPrefs.GetInt("MovingObjects").ToString() +
         PlayerPrefs.GetInt("DifferentObjects").ToString() +
         PlayerPrefs.GetInt("LevelAmbient").ToString() +
